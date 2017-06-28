@@ -13,6 +13,17 @@
             "error",
             "always"
         ],
+
+        /*added from us*/
+        "no-trailing-spaces": 0,
+        "no-multiple-empty-lines":0,
+        "eol-last":0,
+        "comma-dangle":0,
+        "spaced-comment":0,
+        "brace-style":[2, "stroustrup"], //if-else
+        "linebreak-style": ["error", "windows"],
+        /*added from us*/
+
         "semi": 2,
         "no-undef": 2,
         "no-use-before-define": 0,
