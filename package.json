@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "The most easiest way for shopping.",
   "main": "app.js",
+  "scripts": {
+    "lint": "eslint **/*.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mongoose-NodeJsTeam/EasyShop.git"
@@ -10,6 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^4.1.1"
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.1.1",
+    "eslint-config-google": "^0.8.0",
+    "express": "^4.15.3"
   }
 }
