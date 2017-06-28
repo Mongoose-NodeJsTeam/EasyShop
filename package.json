@@ -1,0 +1,15 @@
+{
+  "name": "easyshop",
+  "version": "1.0.0",
+  "description": "The most easiest way for shopping.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mongoose-NodeJsTeam/EasyShop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^4.1.1"
+  }
+}
