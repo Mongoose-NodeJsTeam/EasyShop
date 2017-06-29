@@ -4,7 +4,8 @@
   "description": "The most easiest way for shopping.",
   "main": "app.js",
   "scripts": {
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js",
+    "dev": "./node_modules/.bin/nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -14,8 +15,13 @@
   "license": "ISC",
   "dependencies": {
     "babel-eslint": "^7.2.3",
+    "bootstrap": "^3.3.7",
     "eslint": "^4.1.1",
     "eslint-config-google": "^0.8.0",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "pug": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
