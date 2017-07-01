@@ -111,3 +111,13 @@ crashlytics-build.properties
 fabric.properties
 
 --------End of WebStorm ignore------
+
+--------VSCode------
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+--------End of VSCode ignore------
