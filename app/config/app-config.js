@@ -1,7 +1,6 @@
 /* globals __dirname */
 
 const express = require('express');
-const appConstants = require('constants');
 const path = require('path');
 
 const app = express();
@@ -9,6 +8,9 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../views'));
 
-app.set(express.static('public'));
+
+app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));
+
+app.use('/public', express.static(path.join(__dirname, '../../public')));
 
 module.exports = app;
