@@ -1,9 +1,14 @@
-extends _layout
+extends shared/_layout
 
 block app-title
     title EasyShop: Welcome
 
 block content
-    .panel.panel-default
-        .panel-body
-            h1 This comes from HomePage view
+    div(id='main-wrapper')
+        div(class='container-fluid')
+            div(class='row')
+                div(class='class="col-12')
+                    h1(id='homePage-header')
+                        | Something as a slogan and background image
+                    a(id='discover-btn' class='btn btn-success btn-lg' href='/map')
+                        | Explore
