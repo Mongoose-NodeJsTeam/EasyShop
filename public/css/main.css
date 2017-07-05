@@ -1,0 +1,16 @@
+#homePage-header {
+    text-align: center;
+}
+
+#discover-btn {
+    text-align: center;
+    margin-top: 2%;
+    margin-left: 48%;
+}
+
+#map {
+    position: relative;
+    margin: 0 auto;
+    width: 1200px;
+    height: 800px;
+}
