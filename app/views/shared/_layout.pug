@@ -3,26 +3,25 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         block app-title
-        link(rel="stylesheet", href="/libs/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/libs/bootstrap/dist/css/bootstrap.css")
+        link(rel="stylesheet", href="/public/css/main.css")
+        block scripts
     body
         nav(class="navbar navbar-default")
             div(class="container-fluid")
                 div(class="navbar-header")
-                    a(class="navbar-brand" href="#")
-                        WebSiteName
                         ul(class="nav navbar-nav")
                             li(class="active")
-                                a(href="#") THIS COMES FROM THE MAIN LAYOUT
+                                a(href="/") EasyPeasyShop
                             li(class="active")
-                                a(href="#") Section 1
+                                a(href="/map") Map
                             li(class="active")
                                 a(href="#") Section 2
                             li(class="active")
                                 a(href="#") Section 3
 
-
     block content
 
-
+    block additionalBottomScripts
 
 
