@@ -2,16 +2,13 @@ const express = require('express');
 const passport = require('passport');
 
 module.exports = (app) => {
+    const authController = require('../controllers/auth-controller')();
+
     const authRouter = new express.Router();
 
     authRouter
-        .get('/sign-in', (req, res) => {
-            res.status(200).render('auth/sign-in');
-        })
-        .post('/sign-in', passport.authenticate('local', {
-            successRedirect: '/',
-            failureRedirect: '/auth/sign-in',
-            failureFlash: true }));
+        .get('/sign-in', authController.loadSignInPage)
+        .post('/sign-in', authController.loginUser);
 
     app.use('/auth', authRouter);
 };
