@@ -8,7 +8,6 @@ module.exports = (app) => {
 
     authRouter
         .get('/sign-in', authController.loadSignInPage)
-        .get('/sign-in', authController.loadSignInPage)
         .post('/sign-in', authController.loginUser)
         .get('/sign-inPro', authController.loadSignInProPage)
         .post('/sign-inPro', authController.loginProUser);
