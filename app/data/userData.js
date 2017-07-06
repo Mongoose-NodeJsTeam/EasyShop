@@ -7,18 +7,19 @@ const usersList = [{
 ];
 
 const users = {
-    findByUsername(username) {
+    findByUsername(username, password) {
         const usernameToLower = username.toLowerCase();
         const user =
             usersList.find((u) =>
-                u.username.toLowerCase() === usernameToLower);
-            return new Promise((resolve, reject) => {
-                if (!user) {
-                    return reject('No user found!');
-                } else {
-                    return resolve(user);
-                }
-            });
+            u.username.toLowerCase() === usernameToLower &&
+            u.password === password);
+        return new Promise((resolve, reject) => {
+            if (!user) {
+                return reject('No user found!');
+            } else {
+                return resolve(user);
+            }
+        });
     },
     findUserById(id) {
         id = parseInt(id, 10);

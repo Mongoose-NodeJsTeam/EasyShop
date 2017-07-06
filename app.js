@@ -3,10 +3,12 @@ const appConstants = require('./app/common/app-constants');
 
 const app = express();
 
-const data = require('./app/data');
+const data1 = require('../../latest/EasyShop/app/data/userData');
+const data2 = require('../../latest/EasyShop/app/data/shopData');
 
 require('./app/config/app-config')(app);
-require('./app/config/auth-config')(app, data);
+require('../../latest/EasyShop/app/config/auth-config-user')(app, data1);
+require('../../latest/EasyShop/app/config/auth-config-shop')(app, data2);
 require('./app/routers')(app);
 
 app.listen(appConstants.APP_PORT, () => {
