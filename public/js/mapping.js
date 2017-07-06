@@ -26,18 +26,16 @@
 
     let center = [42.69763969, 23.32187176];
 
-    var infowindow = new google.maps.InfoWindow(),
-        marker,
-        i;
-
-    var map = new google.maps.Map(document.getElementById('map'), {
+    let map = new google.maps.Map(document.getElementById('map'), {
         zoom: 4,
         center: center
     });
 
-    for (var i = 0; i < shops.length; i++) {
+    for (let i = 0; i < shops.length; i++) {
         let position = new google.maps.LatLng(shops[i].latitude, shops[i].longitude);
+
         bounds.extend(position);
+
         marker = new google.maps.Marker({
             position: position,
             map: map,
@@ -49,7 +47,7 @@
         google.maps.event.addListener(marker, 'click', getInfoCallback(map, content));
 
         function getInfoCallback(map, content) {
-            var infowindow = new google.maps.InfoWindow({content: content});
+            let infowindow = new google.maps.InfoWindow({content: content});
             return function() {
                 infowindow.setContent(content);
                 infowindow.open(map, this);
@@ -59,13 +57,4 @@
         // Automatically center the map fitting all markers on the screen
         map.fitBounds(bounds);
     }
-
-
-
-
-
-
-
-
-
 })();
