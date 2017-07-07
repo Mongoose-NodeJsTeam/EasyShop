@@ -1,10 +1,6 @@
-const shopList = [{
-    id: 1,
-    username: 'Bila',
-    password: 'aideee'
-}
+const billa = require('../models/proUser').getProUser(1, 'billa', '1234');
 
-];
+const shopList = [billa];
 
 const shops = {
     findByUsername(username, password) {

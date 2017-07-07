@@ -1,10 +1,6 @@
-const usersList = [{
-    id: 1,
-    username: 'jhon',
-    password: '123456'
-}
+const uri = require('../models/user').getUser(1, 'uri', '1234', 'boris 3', 'uri@abv.bg');
 
-];
+const usersList = [uri];
 
 const users = {
     findByUsername(username, password) {
