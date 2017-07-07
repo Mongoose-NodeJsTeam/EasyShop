@@ -7,6 +7,8 @@ html(lang="en")
         link(rel="stylesheet", href="/public/css/main.css")
         block scripts
     body
+        div
+            - console.log(user)
         if user
             if user.isRegularUser
                 include ../partials/navigation/_navigation-logedIn-User

@@ -8,7 +8,7 @@ block auth-options
     ul(class="nav navbar-nav navbar-right")
         li
             a(href="/auth/sign-in-options")
-                span(class="glyphicon glyphicon-user")  User
+                span(class="glyphicon glyphicon-user")= ' ' + user.username
         li
-            a(href="/")
+            a(href="/auth/logout-regularUser")
                 span(class="glyphicon glyphicon-log-out")  LogOut

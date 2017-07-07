@@ -1,17 +1,17 @@
 const passport = require('passport');
-const Strategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const configAuthShop = (app, data) => {
+const configAuthRegularUser = (app, data) => {
     app.use(cookieParser());
-    app.use(session({ secret: 'Bla Bla'}));
+    app.use(session({ secret: 'Purple Unicorn' }));
     app.use(passport.initialize());
     app.use(passport.session());
 
-    passport.use('shop', new Strategy(
+    passport.use('regularUser', new LocalStrategy(
         (username, password, done) => {
-            data.shops.findByUsername(username,password)
+            data.regularUsers.findRegularUserByUsername(username, password)
                 .then((user) => {
                     return done(null, user);
                 })
@@ -23,8 +23,8 @@ const configAuthShop = (app, data) => {
                 done(null, user.id);
             });
 
-            passport.deserializeUser(function (id, done) {
-                return data.shops.findUserById(id)
+            passport.deserializeUser(function(id, done) {
+                return data.regularUsers.findRegularUserById(id)
                     .then((user) => {
                         done(null, user);
                     })
@@ -34,4 +34,4 @@ const configAuthShop = (app, data) => {
     ));
 };
 
-module.exports = configAuthShop;
+module.exports = configAuthRegularUser;

@@ -1,29 +1,27 @@
 const billa = require('../models/proUser').getProUser(1, 'billa', '1234');
 
-const shopList = [billa];
+const proUsersList = [billa];
 
-const shops = {
-    findByUsername(username, password) {
+const proUsers = {
+    findProUserByUsername(username, password) {
         const usernameToLower = username.toLowerCase();
-        const user =
-            shopList.find((u) =>
+        const proUser =
+            proUsersList.find((u) =>
                 u.username.toLowerCase() === usernameToLower &&
-                u.password === password
-            )
-        ;
+                u.password === password);
         return new Promise((resolve, reject) => {
-            if (!user) {
-                return reject('No user found!');
+            if (!proUser) {
+                return reject('No pro user found!');
             } else {
-                return resolve(user);
+                return resolve(proUser);
             }
         });
     },
-    findUserById(id) {
+    findProUserById(id) {
         id = parseInt(id, 10);
 
         const user =
-            shopList.find((u) =>
+            proUsersList.find((u) =>
             u.id === id);
         return new Promise((resolve, reject) => {
             if (!user) {
@@ -36,5 +34,5 @@ const shops = {
 };
 
 module.exports = {
-    shops
+    proUsers
 };

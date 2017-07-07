@@ -3,12 +3,12 @@ const appConstants = require('./app/common/app-constants');
 
 const app = express();
 
-const userData = require('./app/data/userData');
-const shopData = require('./app/data/shopData');
+const userData = require('./app/data/regularUserData');
+const proUserData = require('./app/data/proUserData');
 
 require('./app/config/app-config')(app);
-require('./app/config/auth-config-user')(app, userData);
-require('./app/config/auth-config-shop')(app, shopData);
+require('./app/config/auth/auth-config-regularUser')(app, userData);
+require('./app/config/auth/auth-config-proUser')(app, proUserData);
 require('./app/routers')(app);
 
 app.listen(appConstants.APP_PORT, () => {
