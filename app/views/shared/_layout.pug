@@ -7,20 +7,16 @@ html(lang="en")
         link(rel="stylesheet", href="/public/css/main.css")
         block scripts
     body
-        nav(class="navbar navbar-default")
-            div(class="container-fluid")
-                div(class="navbar-header")
-                        ul(class="nav navbar-nav")
-                            li(class="active")
-                                a(href="/") EasyPeasyShop
-                            li(class="active")
-                                a(href="/map") Map
-                            li(class="active")
-                                a(href="/auth/sign-in") Sign in
-                            li(class="active")
-                                a(href="/auth/sign-inPro") Sign inPro
-                            li(class="active")
-                                a(href="#") Section 3
+        div
+            - console.log(user)
+        if user
+            if user.isRegularUser
+                include ../partials/_navigation-logedIn-User
+            else
+                include ../partials/_navigation-logedIn-Shop
+        else
+            include  ../partials/_navigation
+
 
     block content
 

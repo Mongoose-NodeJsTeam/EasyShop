@@ -1,0 +1,22 @@
+header
+    nav(class="navbar navbar-inverse")
+        div(class="container-fluid")
+            div(class="navbar-header")
+                a(class="navbar-brand" href="/") EasyPeasyShop
+            ul(class="nav navbar-nav")
+                li(class="active")
+                    a(href="/") Home
+                li(class="active")
+                    a(href="/map") Map
+                li(class="active")
+                    a(href="/auth/sign-inPro") Sign In Pro
+                block autorized
+            ul(class="nav navbar-nav navbar-right")
+                li
+                    a(href="/auth/sign-in")
+                        span(class="glyphicon glyphicon-log-in")  Sign In
+                li
+                    a(href="/")
+                        span(class="glyphicon glyphicon-user")  Sign Up
+
+
