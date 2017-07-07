@@ -1,7 +1,17 @@
 module.exports = function() {
     return {
         loadHomePage(req, res) {
-            res.status(200).render('homePage');
+            return Promise.resolve()
+                .then(() => {
+                    if (!req.isAuthenticated()) {
+                        res.render('homePage', {});
+                    } else {
+                        res.status(200)
+                            .render('homePage', {
+                                user: req.user
+                            });
+                    }
+                });
         }
     };
 };
