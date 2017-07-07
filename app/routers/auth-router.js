@@ -7,10 +7,11 @@ module.exports = (app) => {
     const authRouter = new express.Router();
 
     authRouter
-        .get('/sign-in', authController.loadSignInPage)
-        .post('/sign-in', authController.loginUser)
-        .get('/sign-inPro', authController.loadSignInProPage)
-        .post('/sign-inPro', authController.loginProUser);
+        .get('/sign-in-options', authController.loadSignInOptions)
+        .get('/sign-in-regularUser', authController.loadSignInRegularUserForm)
+        .post('/sign-in-regularUser', authController.loginUser)
+        .get('/sign-in-proUser', authController.loadSignInProUserForm)
+        .post('/sign-in-proUser', authController.loginProUser);
 
     app.use('/auth', authRouter);
 };

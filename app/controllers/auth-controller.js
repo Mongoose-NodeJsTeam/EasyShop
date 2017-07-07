@@ -2,8 +2,11 @@ const passport = require('passport');
 
 module.exports = function() {
     return {
-        loadSignInPage(req, res) {
-            res.status(200).render('auth/sign-in');
+        loadSignInOptions(req, res) {
+            res.status(200).render('auth/sign-in-options');
+        },
+        loadSignInRegularUserForm(req, res) {
+            res.status(200).render('auth/sign-in-regularUser');
         },
         loginUser(req, res, next) {
             const auth = passport.authenticate('user', function (error, user) {
@@ -39,8 +42,8 @@ module.exports = function() {
                     }
                 });
         },
-        loadSignInProPage(req, res) {
-            res.status(200).render('auth/sign-inPro');
+        loadSignInProUserForm(req, res) {
+            res.status(200).render('auth/sign-in-proUser');
         },
         loginProUser(req, res, next) {
             const auth = passport.authenticate('shop', function (error, user) {
