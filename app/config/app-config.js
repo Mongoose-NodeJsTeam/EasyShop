@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 const configApp = (app) => {
     app.set('view engine', 'pug');
     app.set('views', path.join(__dirname, '../views'));
-	
+
+    app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 
     app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));

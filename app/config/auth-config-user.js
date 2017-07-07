@@ -11,7 +11,7 @@ const configAuth = (app, data) => {
 
     passport.use('user', new Strategy(
         (username, password, done) => {
-            data.users.findByUsername(username,password)
+            data.users.findByUsername(username, password)
                 .then((user) => {
                     return done(null, user);
                 })

@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-module.exports = function () {
+module.exports = function() {
     return {
         loadSignInPage(req, res) {
             res.status(200).render('auth/sign-in');

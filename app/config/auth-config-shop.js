@@ -5,7 +5,7 @@ const session = require('express-session');
 
 const configAuthShop = (app, data) => {
     app.use(cookieParser());
-    app.use(session({secret: 'Purple Unicorn'}));
+    app.use(session({ secret: 'Bla Bla'}));
     app.use(passport.initialize());
     app.use(passport.session());
 
