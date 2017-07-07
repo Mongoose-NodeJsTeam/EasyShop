@@ -1,0 +1,16 @@
+extends ../shared/_layout
+
+block app-title
+    title EasyPeasyShop: Sign in
+
+block scripts
+
+
+block content
+    div(class='container-fluid')
+        div(class='row')
+            div(class='col-xs-12 .col-sm-6 .col-md-8 text-center')
+                a(class="btn btn-primary" href='/auth/sign-in-regularUser') SignIn as regular user
+                a(class="btn btn-primary" href='/auth/sign-in-proUser') SignIn as pro user
+
+    block signInForm

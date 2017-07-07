@@ -1,10 +1,7 @@
-extends ../shared/_layout
+extends sign-in-options
 
-block app-title
-    title EasyPeasyShop:Sign in
-
-block content
-    form(action='/auth/sign-inPro', method='post')
+block signInForm
+    form(action='/auth/sign-in-proUser', method='post')
         div
             label Username:
                 input(type='text', name='username')

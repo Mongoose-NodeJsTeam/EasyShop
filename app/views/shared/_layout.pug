@@ -7,8 +7,6 @@ html(lang="en")
         link(rel="stylesheet", href="/public/css/main.css")
         block scripts
     body
-        div
-            - console.log(user)
         if user
             if user.isRegularUser
                 include ../partials/_navigation-logedIn-User
@@ -16,7 +14,6 @@ html(lang="en")
                 include ../partials/_navigation-logedIn-Shop
         else
             include  ../partials/_navigation
-
 
     block content
 
