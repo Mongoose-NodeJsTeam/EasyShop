@@ -1,0 +1,14 @@
+extends _navigation
+
+block autorized-nav-links
+    li(class="active")
+        a(href="#") LogedIn user
+
+block auth-options
+    ul(class="nav navbar-nav navbar-right")
+        li
+            a(href="/auth/sign-in-options")
+                span(class="glyphicon glyphicon-user")  User
+        li
+            a(href="/")
+                span(class="glyphicon glyphicon-log-out")  LogOut

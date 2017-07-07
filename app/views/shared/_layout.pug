@@ -9,14 +9,12 @@ html(lang="en")
     body
         if user
             if user.isRegularUser
-                include ../partials/_navigation-logedIn-User
+                include ../partials/navigation/_navigation-logedIn-User
             else
-                include ../partials/_navigation-logedIn-Shop
+                include ../partials/navigation/_navigation-logedIn-Shop
         else
-            include  ../partials/_navigation
+            include  ../partials/navigation/_navigation
 
     block content
 
     block additionalBottomScripts
-
-

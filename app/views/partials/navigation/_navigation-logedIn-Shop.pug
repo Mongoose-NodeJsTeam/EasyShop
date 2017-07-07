@@ -1,0 +1,14 @@
+extends _navigation
+
+block autorized-nav-links
+    li(class="active")
+        a(href="#") LogedIn Shop
+
+block auth-options
+    ul(class="nav navbar-nav navbar-right")
+        li
+            a(href="/auth/sign-in-options")
+                span(class="glyphicon glyphicon-shopping-cart")  Shop
+        li
+            a(href="/")
+                span(class="glyphicon glyphicon-log-out")  LogOut
