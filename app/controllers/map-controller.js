@@ -1,7 +1,17 @@
 module.exports = function() {
     return {
         loadMap(req, res) {
-            res.status(200).render('mapPage');
+            return Promise.resolve()
+                .then(() => {
+                    if (!req.isAuthenticated()) {
+                        res.render('mapPage', {});
+                    } else {
+                        res.status(200)
+                            .render('mapPage', {
+                                user: req.user
+                            });
+                    }
+                });
         }
     };
 };
