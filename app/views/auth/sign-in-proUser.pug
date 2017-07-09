@@ -1,11 +1,25 @@
 extends sign-in-options
 
 block signInForm
-    form(action='/auth/sign-in-proUser', method='post')
-        div
-            label Username:
-                input(type='text', name='username')
-            label Password:
-                input(type='password', name='password')
-            button(class= 'btn btn-success')
-                | Sign in
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h3.text-center Login as a pro user
+            .modal-body
+                .wrapper
+                    form(action='/auth/sign-in-proUser', method='post')
+                        .form-group
+                            .input-group
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-user
+                                input.form-control.input-lg(type='text', placeholder='Username', name='username')
+                        .form-group
+                            .input-group
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-lock
+                                input.form-control.input-lg(type='password', placeholder='Password', name='password')
+                        .form-group
+                            input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Login')
+                            span.pull-right
+                                | You don't have an account?
+                                a(href='/sign-up/sign-up-proUser')   Register
