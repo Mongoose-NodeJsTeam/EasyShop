@@ -1,17 +1,14 @@
 extends _navigation
 
 block autorized-nav-links
-    li(class="active")
-        a(href="#") LogedIn user
-    li(class="active")
+    li.active
         a(href="/profile") Profile User
 
-
 block auth-options
-    ul(class="nav navbar-nav navbar-right")
+    ul.nav.navbar-nav.navbar-right
         li
             a(href="/auth/sign-in-options")
-                span(class="glyphicon glyphicon-user")= ' ' + user.username
+                span.glyphicon.glyphicon-user= ' ' + user.username
         li
             a(href="/auth/logout-regularUser")
-                span(class="glyphicon glyphicon-log-out")  LogOut
+                span.glyphicon.glyphicon-log-out  LogOut

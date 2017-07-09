@@ -4,11 +4,11 @@ block app-title
     title EasyShop: Welcome
 
 block content
-    div(id='main-wrapper')
-        div(class='container-fluid')
-            div(class='row')
-                div(class='class="col-12')
-                    h1(id='homePage-header')
+    .main-wrapper
+        .container-fluid
+            .row
+                .col-12
+                    h1#homePage-header
                         | Something as a slogan and background image
-                    a(id='discover-btn' class='btn btn-success btn-lg' href='/map')
+                    a#discover-btn.btn.btn-success.btn-lg(href='/map')
                         | Explore

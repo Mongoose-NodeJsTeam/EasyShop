@@ -1,17 +1,15 @@
 extends _navigation
 
 block autorized-nav-links
-    li(class="active")
-        a(href="#") LogedIn Shop
-    li(class="active")
+    li.active
         a(href="/profile") Profile Shop
 
 block auth-options
-    ul(class="nav navbar-nav navbar-right")
+    ul.nav.navbar-nav.navbar-right
         li
             a(href="/auth/sign-in-options")
-                span(class="glyphicon glyphicon-shopping-cart")= ' ' + user.username
+                span.glyphicon.glyphicon-shopping-cart= ' ' + user.username
         li
             a(href="/auth/logout-proUser")
-                span(class="glyphicon glyphicon-log-out")  LogOut
+                span.glyphicon.glyphicon-log-out  LogOut
 

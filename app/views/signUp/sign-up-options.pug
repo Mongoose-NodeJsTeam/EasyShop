@@ -1,10 +1,10 @@
 extends ../shared/_layout
 
 block content
-    div(class='container-fluid')
-        div(class='row')
-            div(class='col-xs-12 .col-sm-6 .col-md-8 text-center')
-                a(class="btn btn-primary" href='/sign-up/sign-up-regularUser') Register a new regular user
-                a(class="btn btn-primary" href='/sign-up/sign-up-proUser') Register a new pro user
+    .container-fluid
+        .row
+            .text-center
+                a.btn.btn-primary(href='/sign-up/sign-up-regularUser') Register a new regular user
+                a.btn.btn-primary(href='/sign-up/sign-up-proUser') Register a new pro user
 
     block signUpForm
