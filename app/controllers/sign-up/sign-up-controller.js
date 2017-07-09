@@ -14,18 +14,23 @@ module.exports = function () {
             res.status(200).render('signUp/sign-up-proUser');
         },
         signUpNewProUser(req, res){
-            //promise+validation
-            const item = req.body;
+            const modelProUser = req.body;
 
-            proUser.proUsers.createProUser(item.username, item.password);
+            proUser.proUsers.createProUser(
+                modelProUser.username,
+                modelProUser.password,
+                modelProUser.email);
 
-            //navigation to logged in proUser
             res.redirect('/auth/sign-in-proUser');
         },
         signUpNewRegularUser(req, res){
-            //promise+validation
-            const item = req.body;
-            regularUser.regularUsers.createRegularUser(item.username, item.password, item.adress, item.email);
+            const modelRegularUser = req.body;
+
+            regularUser.regularUsers.createRegularUser(
+                modelRegularUser.username,
+                modelRegularUser.password,
+                modelRegularUser.adress,
+                modelRegularUser.email);
 
             res.redirect('/auth/sign-in-regularUser');
         }

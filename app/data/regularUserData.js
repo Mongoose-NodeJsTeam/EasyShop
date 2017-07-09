@@ -33,15 +33,15 @@ const regularUsers = {
             }
         });
     },
-    createRegularUser(username, password, adress, email){
+    createRegularUser(username, password, address, email){
         const id = parseInt(regularUsersList.length + 1, 10);
 
         console.log(modelRegularUser);
-        const newUser = modelRegularUser.getUser(id, username, password, adress, email);
+        const newUser = modelRegularUser.getUser(id, username, password, address, email);
 
         return new Promise((resolve, reject) => {
             if (!newUser) {
-                return reject('couldnt create the user');
+                return reject('Could not create the regular user');
             } else {
                 regularUsersList.push(newUser);
 

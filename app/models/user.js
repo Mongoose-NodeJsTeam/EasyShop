@@ -6,9 +6,9 @@ class User {
         this.username = username;
         this.password = password;
         this.address = address;
-        this.tripshoop = [];
         this.email = email;
         this.isRegularUser = true;
+        this.tripshoop = [];
     }
 }
 module.exports = {

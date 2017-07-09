@@ -32,13 +32,13 @@ const proUsers = {
             }
         });
     },
-    createProUser(username, password){
+    createProUser(username, password, email){
         const id = parseInt(proUsersList.length + 1, 10);
 
-        const newProUser = modelProUser.getProUser(id, username, password);
+        const newProUser = modelProUser.getProUser(id, username, password, email);
         return new Promise((resolve, reject) => {
             if (!newProUser) {
-                return reject('couldnt create the user');
+                return reject('Could not create the pro user');
             } else {
                 proUsersList.push(newProUser);
                 console.log(proUsersList);
