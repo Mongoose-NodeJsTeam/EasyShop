@@ -1,0 +1,12 @@
+extends sign-up-options
+
+block signUpForm
+    form(action='/sign-up/sign-up-proUser', method='post')
+        div
+            label Username:
+                input(type='text', name='username')
+        div
+            label Password:
+                input(type='password', name='password')
+        button(class= 'btn btn-success')
+            | Create user

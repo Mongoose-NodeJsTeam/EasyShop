@@ -1,4 +1,5 @@
 const billa = require('../models/proUser').getProUser(1, 'billa', '1234');
+const modelProUser = require('../models/proUser');
 
 const proUsersList = [billa];
 
@@ -7,8 +8,8 @@ const proUsers = {
         const usernameToLower = username.toLowerCase();
         const proUser =
             proUsersList.find((u) =>
-                u.username.toLowerCase() === usernameToLower &&
-                u.password === password);
+            u.username.toLowerCase() === usernameToLower &&
+            u.password === password);
         return new Promise((resolve, reject) => {
             if (!proUser) {
                 return reject('No pro user found!');
@@ -31,6 +32,20 @@ const proUsers = {
             }
         });
     },
+    createProUser(username, password){
+        const id = parseInt(proUsersList.length + 1, 10);
+
+        const newProUser = modelProUser.getProUser(id, username, password);
+        return new Promise((resolve, reject) => {
+            if (!newProUser) {
+                return reject('couldnt create the user');
+            } else {
+                proUsersList.push(newProUser);
+                console.log(proUsersList);
+                return resolve(newProUser);
+            }
+        });
+    }
 };
 
 module.exports = {

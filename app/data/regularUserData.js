@@ -1,5 +1,6 @@
 const uri = require('../models/user').getUser(1, 'uri', '1234', 'boris 3', 'uri@abv.bg');
 const moni = require('../models/user').getUser(2, 'moni', '1234', 'boris 3', 'uri@abv.bg');
+const modelRegularUser = require('../models/user');
 
 const regularUsersList = [uri, moni];
 
@@ -8,8 +9,8 @@ const regularUsers = {
         const usernameToLower = username.toLowerCase();
         const user =
             regularUsersList.find((u) =>
-				u.username.toLowerCase() === usernameToLower &&
-				u.password === password);
+            u.username.toLowerCase() === usernameToLower &&
+            u.password === password);
         return new Promise((resolve, reject) => {
             if (!user) {
                 return reject('No user found!');
@@ -32,6 +33,23 @@ const regularUsers = {
             }
         });
     },
+    createRegularUser(username, password, adress, email){
+        const id = parseInt(regularUsersList.length + 1, 10);
+
+        console.log(modelRegularUser);
+        const newUser = modelRegularUser.getUser(id, username, password, adress, email);
+
+        return new Promise((resolve, reject) => {
+            if (!newUser) {
+                return reject('couldnt create the user');
+            } else {
+                regularUsersList.push(newUser);
+
+                return resolve(newUser);
+            }
+        });
+
+    }
 };
 
 module.exports = {
