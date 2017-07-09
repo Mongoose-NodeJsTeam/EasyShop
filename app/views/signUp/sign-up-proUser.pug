@@ -1,12 +1,35 @@
 extends sign-up-options
 
 block signUpForm
-    form(action='/sign-up/sign-up-proUser', method='post')
-        div
-            label Username:
-                input(type='text', name='username')
-        div
-            label Password:
-                input(type='password', name='password')
-        button(class= 'btn btn-success')
-            | Create user
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h3.text-center Register new pro user
+            .modal-body
+                .wrapper
+                    form(action='/sign-up/sign-up-proUser', method='post')
+                        .form-group
+                            .input-group
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-user
+                                input.form-control.input-lg(type='text', placeholder='Username', name='username')
+                        .form-group
+                            .input-group
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-envelope
+                                input.form-control.input-lg(type='email', placeholder='Email', name='email')
+                        .form-group
+                            .input-group
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-home
+                                input.form-control.input-lg(type='text', placeholder='Address', name='address')
+                        .form-group
+                            .input-group
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-lock
+                                input.form-control.input-lg(type='password', placeholder='Password', name='password')
+                        .form-group.text-center
+                            input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Register')
+                            span.text-center
+                                h4 OR
+                                a.btn(href='/auth/sign-in-proUser') Login
