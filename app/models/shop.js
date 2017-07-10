@@ -7,7 +7,6 @@ class Shop {
         this.mobile = mobile;
         this.description = description;
         this.products = [];
-        this.promotions=[];
     }
 }
 

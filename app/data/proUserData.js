@@ -11,6 +11,7 @@ const proUsers = {
             proUsersList.find((u) =>
             u.username.toLowerCase() === usernameToLower &&
             u.password === password);
+
         return new Promise((resolve, reject) => {
             if (!proUser) {
                 return reject('No pro user found!');
@@ -25,9 +26,10 @@ const proUsers = {
         const user =
             proUsersList.find((u) =>
             u.id === id);
+
         return new Promise((resolve, reject) => {
             if (!user) {
-                return reject('No user found!');
+                return reject('No pro user found!');
             } else {
                 return resolve(user);
             }
@@ -49,19 +51,15 @@ const proUsers = {
         });
     },
     addNewShop(proUserId, name, address, email, mobile, description) {
-        const proUserToAssignShop = this.findProUserById(proUserId);
+        const proUserToAssignShop = this.findProUserById(proUserId)
+            .then((proUser) => {
+                const newShop = modelShop.getShop(4, name, address, email, mobile, description);
 
-        return new Promise((resolve, reject) => {
-            if (!proUserToAssignShop) {
-                return reject('Could not find pro user with this Id');
-            } else {
-                const id = parseInt(proUserToAssignShop.shops.length + 1, 10);
-
-                const newShop = modelShop.getShop(id, name, address, email, mobile, description);
-                proUserToAssignShop.shops.push(newShop);
-                return resolve(proUserToAssignShop);
-            }
-        });
+                return new Promise((resolve, reject) => {
+                    proUser.shops.push(newShop);
+                    resolve(proUser);
+                });
+            });
     }
 };
 
