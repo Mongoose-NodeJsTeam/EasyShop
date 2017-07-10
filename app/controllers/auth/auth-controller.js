@@ -1,5 +1,3 @@
-const passport = require('passport');
-
 module.exports = function() {
     return {
         loadSignInOptions(req, res) {
@@ -12,7 +10,6 @@ module.exports = function() {
                         res.redirect('/');
                     } else {
                         req.logout();
-                        req.session.destroy();
                         res.redirect('/');
                     }
                 });

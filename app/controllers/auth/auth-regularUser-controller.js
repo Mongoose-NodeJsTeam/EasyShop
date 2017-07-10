@@ -38,20 +38,7 @@ module.exports = function() {
                         res.redirect('/');
                     }
                 });
-        },
-        logout(req, res) {
-            return Promise.resolve()
-                .then(() => {
-                    if (!req.isAuthenticated()) {
-                        res.redirect('/');
-                    } else {
-                        req.session.destroy();
-                        req.logout();
-
-                        res.redirect('/');
-                    }
-                });
-        },
+        }
     };
 };
 
