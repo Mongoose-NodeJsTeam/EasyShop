@@ -1,0 +1,35 @@
+extends ../shared/_layout
+
+block app-title
+    title EasyShop: Add new shop
+
+block scripts
+    link(rel="stylesheet", href="/public/css/addShop.css")
+
+block content
+    section#contact
+        .section-content.text-center
+            h1.section-header
+                | Create new shop
+        .contact-section
+            .container
+                form(action='/shop/add-shop', method='post')
+                    .col-md-6.form-line
+                        .form-group
+                            label(for='name') Shop name
+                            input.form-control(type='text', id='name', name='name', placeholder='Shop Name')
+                        .form-group
+                            label(for='address') Address
+                            input#address.form-control(type='text', name='address', placeholder='Address: No, street, country')
+                        .form-group
+                            label(for='email') Email
+                            input#email.form-control(type='email', name='email', placeholder='Shop email')
+                    .col-md-6
+                        .form-group
+                            label(for='tel') Mobile No.
+                            input#tel.form-control(type='tel', name='mobile', placeholder='Mobile number')
+                        .form-group
+                            label(for='description')  Description
+                            textarea#description.form-control(name='description', placeholder='Shop description')
+                        div
+                            input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Create')

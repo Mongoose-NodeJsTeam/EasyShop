@@ -1,0 +1,23 @@
+extends ../shared/_layout
+
+block app-title
+    title EasyShop: MyShops
+
+
+block content
+    if user.shops.count > 0
+        .container
+            .container-fliud
+                .row
+                    .col-md-6.text-center
+                        img(src='https://camo.mybb.com/e01de90be6012adc1b1701dba899491a9348ae79/687474703a2f2f7777772e6a71756572797363726970742e6e65742f696d616765732f53696d706c6573742d526573706f6e736976652d6a51756572792d496d6167652d4c69676874626f782d506c7567696e2d73696d706c652d6c69676874626f782e6a7067')
+                    .col-md-4
+                        h3 Name of shop
+    else
+        .container
+            h3 You dont have any registered shops
+            a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
+
+
+block additionalBottomScripts
+
