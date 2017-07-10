@@ -2,12 +2,14 @@ extends _navigation
 
 block autorized-nav-links
     li.active
-        a(href="/profile") Profile User
+        a(href="/profile") Tripshops
+    li.active
+        a(href="/profile") Shops
 
 block auth-options
     ul.nav.navbar-nav.navbar-right
         li
-            a(href="/auth/sign-in-options")
+            a(href="/profile")
                 span.glyphicon.glyphicon-user= ' ' + user.username
         li
             a(href="/auth/logout-regularUser")

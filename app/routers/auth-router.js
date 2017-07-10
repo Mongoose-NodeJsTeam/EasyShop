@@ -14,8 +14,8 @@ module.exports = (app) => {
         .post('/sign-in-regularUser', authRegularUserController.loginRegularUser)
         .get('/sign-in-proUser', authProUserController.loadSignInProUserForm)
         .post('/sign-in-proUser', authProUserController.loginProUser)
-        .get('/logout-proUser', authProUserController.logout)
-        .get('/logout-regularUser', authRegularUserController.logout);
+        .get('/logout-proUser', authController.logout)
+        .get('/logout-regularUser', authController.logout);
 
     app.use('/auth', authRouter);
 };

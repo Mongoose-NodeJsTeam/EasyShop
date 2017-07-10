@@ -1,9 +1,18 @@
 class Shop {
-    constructor(name, adress) {
+    constructor(id, name, address, email, mobile, description) {
+        this.id = id;
         this.name = name;
-        this.adress = adress;
+        this.address = address;
+        this.email = email;
+        this.mobile = mobile;
+        this.description = description;
         this.products = [];
         this.promotions=[];
     }
 }
-module.exports=Shop;
+
+module.exports = {
+    getShop(id, name, address, email, mobile, description) {
+        return new Shop(id, name, address, email, mobile, description);
+    }
+};

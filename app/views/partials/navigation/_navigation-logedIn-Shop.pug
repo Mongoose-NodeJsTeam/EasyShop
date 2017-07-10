@@ -2,12 +2,12 @@ extends _navigation
 
 block autorized-nav-links
     li.active
-        a(href="/profile") Profile Shop
+        a(href="/shop/my-shops") My shops
 
 block auth-options
     ul.nav.navbar-nav.navbar-right
         li
-            a(href="/auth/sign-in-options")
+            a(href="/profile")
                 span.glyphicon.glyphicon-shopping-cart= ' ' + user.username
         li
             a(href="/auth/logout-proUser")

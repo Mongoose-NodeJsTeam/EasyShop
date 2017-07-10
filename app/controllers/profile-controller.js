@@ -4,7 +4,9 @@ module.exports = function () {
             console.log(req.user)
 
             res.status(200)
-                .render('profile', {user: req.user});
+                .render('profile', {
+                    user: req.user
+                });
         }
     };
 };
