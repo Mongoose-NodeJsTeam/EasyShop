@@ -7,7 +7,7 @@ module.exports = function(app) {
     const mapRouter = new express.Router();
 
     mapRouter
-        .get('/', mapController.loadMap);
+        .get('/', mapController.loadMapPage);
 
     app.use('/map', mapRouter);
 };

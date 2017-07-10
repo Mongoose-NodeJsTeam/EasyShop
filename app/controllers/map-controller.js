@@ -1,6 +1,6 @@
 module.exports = function() {
     return {
-        loadMap(req, res) {
+        loadMapPage(req, res) {
             return Promise.resolve()
                 .then(() => {
                     if (!req.isAuthenticated()) {
