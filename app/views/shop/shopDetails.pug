@@ -7,3 +7,9 @@ block app-title
 block content
     .container-fluid
         h2.text-center #{shop.name}
+        if shop.products.length > 0
+            h4 Products: #{shop.products.length}
+            a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product
+        else
+            h4 No products
+            a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product

@@ -5,8 +5,8 @@ block app-title
 
 
 block content
-    a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
     if user.shops.length > 0
+        a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
         .container-fluid
             .row
                 each shop in user.shops
