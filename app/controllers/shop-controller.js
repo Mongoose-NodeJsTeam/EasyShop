@@ -27,6 +27,18 @@ module.exports = function () {
             );
 
             res.redirect('my-shops');
+        },
+        loadSpecifiedShop(req, res) {
+            const userId = req.user.id;
+            const shopId = req.params.id;
+
+            return proUserData.proUsers.findShopById(userId, shopId)
+                .then((shop) => {
+                    res.render('shop/shopDetails', {
+                        user: req.user,
+                        shop: shop
+                    });
+                });
         }
     };
 };
