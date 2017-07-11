@@ -5,11 +5,6 @@ module.exports = function() {
         loadSignInProUserForm(req, res) {
             res.status(200).render('auth/sign-in-proUser');
         },
-        signUpProUser(req,res){
-            const newProUser=0;
-
-
-        },
         loginProUser(req, res, next) {
             const auth = passport.authenticate('proUser', function (error, user) {
                 if (error) {
@@ -31,7 +26,7 @@ module.exports = function() {
                         return;
                     }
 
-                    res.redirect('/');
+                    res.redirect('/shop/my-shops');
                 });
             });
 
@@ -40,7 +35,7 @@ module.exports = function() {
                     if (!req.isAuthenticated()) {
                         auth(req, res, next);
                     } else {
-                        res.redirect('/');
+                        res.redirect('/shop/my-shops');
                     }
                 });
         }
