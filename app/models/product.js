@@ -1,22 +1,14 @@
 class Product {
-    constructor(name, price, category) {
+    constructor(id, name, price, weight ) {
+        this.id = id;
         this.name = name;
         this.price = price;
-        this.category = category;
-    }
-
-    createPromotion(product, reduction, date) {
-        const promoPrice = product.price - product.price * reduction;
-        product.isPromotion = true;
-        const startDate = date;
-        const endDate = startDate + 7;
-
-        return {
-            product: product,
-            price: promoPrice,
-            startDate: startDate,
-            endDate: endDate,
-        };
+        this.weight = weight;
     }
 }
-module.exports = Product;
+
+module.exports = {
+    getProduct(id, name, price, weight) {
+        return new Product(id, name, price, weight);
+    }
+};
