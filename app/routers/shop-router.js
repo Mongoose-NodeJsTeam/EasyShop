@@ -8,7 +8,8 @@ module.exports = function (app) {
     shopRouter
         .get('/my-shops', shopController.loadMyShopsPage)
         .get('/add-shop', shopController.loadAddNewShopPage)
-        .post('/add-shop', shopController.createNewShop);
+        .post('/add-shop', shopController.createNewShop)
+        .get('/:id', shopController.loadSpecifiedShop);
 
     app.use('/shop', shopRouter);
 

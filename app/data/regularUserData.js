@@ -48,7 +48,6 @@ const regularUsers = {
                 return resolve(newUser);
             }
         });
-
     }
 };
 
