@@ -12,5 +12,4 @@ module.exports = function (app) {
         .get('/:id', shopController.loadSpecifiedShop);
 
     app.use('/shop', shopRouter);
-
 };

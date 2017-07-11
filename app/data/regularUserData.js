@@ -6,12 +6,13 @@ const regularUsersList = [uri, moni];
 
 const regularUsers = {
     findRegularUserByUsername(username, password) {
-        const usernameToLower = username.toLowerCase();
-        const user =
-            regularUsersList.find((u) =>
-            u.username.toLowerCase() === usernameToLower &&
-            u.password === password);
         return new Promise((resolve, reject) => {
+            const usernameToLower = username.toLowerCase();
+            const user =
+                regularUsersList.find((u) =>
+                u.username.toLowerCase() === usernameToLower &&
+                u.password === password);
+
             if (!user) {
                 return reject('No user found!');
             } else {
@@ -20,12 +21,13 @@ const regularUsers = {
         });
     },
     findRegularUserById(id) {
-        id = parseInt(id, 10);
-
-        const user =
-            regularUsersList.find((u) =>
-            u.id === id);
         return new Promise((resolve, reject) => {
+            id = parseInt(id, 10);
+
+            const user =
+                regularUsersList.find((u) =>
+                u.id === id);
+
             if (!user) {
                 return reject('No user found!');
             } else {
@@ -34,12 +36,12 @@ const regularUsers = {
         });
     },
     createRegularUser(username, password, address, email){
-        const id = parseInt(regularUsersList.length + 1, 10);
-
-        console.log(modelRegularUser);
-        const newUser = modelRegularUser.getUser(id, username, password, address, email);
-
         return new Promise((resolve, reject) => {
+            const id = parseInt(regularUsersList.length + 1, 10);
+
+            console.log(modelRegularUser);
+            const newUser = modelRegularUser.getUser(id, username, password, address, email);
+
             if (!newUser) {
                 return reject('Could not create the regular user');
             } else {
