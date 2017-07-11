@@ -6,13 +6,13 @@ const proUsersList = [billa];
 
 const proUsers = {
     findProUserByUsername(username, password) {
-        const usernameToLower = username.toLowerCase();
-        const proUser =
-            proUsersList.find((u) =>
-            u.username.toLowerCase() === usernameToLower &&
-            u.password === password);
-
         return new Promise((resolve, reject) => {
+            const usernameToLower = username.toLowerCase();
+            const proUser =
+                proUsersList.find((u) =>
+                u.username.toLowerCase() === usernameToLower &&
+                u.password === password);
+
             if (!proUser) {
                 return reject('No pro user found!');
             } else {
@@ -21,13 +21,13 @@ const proUsers = {
         });
     },
     findProUserById(id) {
-        id = parseInt(id, 10);
-
-        const user =
-            proUsersList.find((u) =>
-            u.id === id);
-
         return new Promise((resolve, reject) => {
+            id = parseInt(id, 10);
+
+            const user =
+                proUsersList.find((u) =>
+                u.id === id);
+
             if (!user) {
                 return reject('No pro user found!');
             } else {
@@ -35,12 +35,31 @@ const proUsers = {
             }
         });
     },
-    createProUser(username, password, email){
-        const id = parseInt(proUsersList.length + 1, 10);
-
-        const newProUser = modelProUser.getProUser(id, username, password, email);
-
+    findShopById(userId, shopId) {
         return new Promise((resolve, reject) => {
+            userId = parseInt(userId, 10);
+            shopId = parseInt(shopId, 10);
+
+            this.findProUserById(userId)
+                .then((proUser) => {
+                    const shop =
+                        proUser.shops.find((u) =>
+                        u.id === shopId);
+
+                    if (!shop) {
+                        return reject('Shop with provided id was not found!');
+                    } else {
+                        return resolve(shop);
+                    }
+                });
+        })
+    },
+    createProUser(username, password, email){
+        return new Promise((resolve, reject) => {
+            const id = parseInt(proUsersList.length + 1, 10);
+
+            const newProUser = modelProUser.getProUser(id, username, password, email);
+
             if (!newProUser) {
                 return reject('Could not create the pro user');
             } else {
@@ -51,9 +70,11 @@ const proUsers = {
         });
     },
     addNewShop(proUserId, name, address, email, mobile, description) {
-        const proUserToAssignShop = this.findProUserById(proUserId)
+        this.findProUserById(proUserId)
             .then((proUser) => {
-                const newShop = modelShop.getShop(4, name, address, email, mobile, description);
+                const newShopId = proUser.shops.length + 1;
+
+                const newShop = modelShop.getShop(newShopId, name, address, email, mobile, description);
 
                 return new Promise((resolve, reject) => {
                     proUser.shops.push(newShop);
