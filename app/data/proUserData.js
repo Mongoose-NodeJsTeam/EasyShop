@@ -1,6 +1,7 @@
 const billa = require('../models/proUser').getProUser(1, 'billa', '1234');
 const modelProUser = require('../models/proUser');
 const modelShop = require('../models/shop');
+const modelProduct = require('../models/product');
 
 const proUsersList = [billa];
 
@@ -81,8 +82,25 @@ const proUsers = {
                     resolve(proUser);
                 });
             });
+    },
+    addNewProduct(proUserId, shopId, name, price, weight) {
+        this.findProUserById(proUserId)
+            .then((proUser) => {
+                this.findShopById(proUser.id, shopId)
+                    .then((shop) => {
+                        const newProductId = shop.products.length + 1;
+
+                        const newProduct = modelProduct.getProduct(newProductId, name, price, weight);
+
+                        return new Promise((resolve, reject) => {
+                            shop.products.push(newProduct);
+                            resolve(shop);
+                        });
+                    });
+            });
     }
 };
+
 
 module.exports = {
     proUsers
