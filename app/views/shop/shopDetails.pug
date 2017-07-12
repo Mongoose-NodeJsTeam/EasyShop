@@ -20,7 +20,7 @@ block content
                                 h5 Weight: #{product.weight} gr.
                             .text-center
                                 a.btn.btn-primary(href='#') Edit
-                                a.btn.btn-danger(href='#') Delete
+                                a.btn.btn-danger(href='/shop/' + shop.id + '/product/delete-product/' + product.id) Delete
         else
             h4 No products
             a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product

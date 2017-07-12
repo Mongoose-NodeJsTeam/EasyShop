@@ -55,7 +55,28 @@ const proUsers = {
                 });
         });
     },
-    createProUser(username, password, email){
+    findProductById(proUserId, shopId, productId) {
+        return new Promise((resolve, reject) => {
+            proUserId = parseInt(proUserId, 10);
+            shopId = parseInt(shopId, 10);
+            productId = parseInt(productId, 10);
+
+            this.findShopById(proUserId, shopId)
+                .then((shop) => {
+                    const product =
+                        shop.products.find((p) =>
+                        p.id === productId);
+
+                    if (!product) {
+                        return reject('Product with provided id was not found!');
+                    } else {
+                        return resolve(product);
+                    }
+                });
+        });
+    },
+    createProUser(username, password, email)
+    {
         return new Promise((resolve, reject) => {
             const id = parseInt(proUsersList.length + 1, 10);
 
@@ -98,6 +119,24 @@ const proUsers = {
                         });
                     });
             });
+    },
+    deleteProductById(proUserId, shopId, productId) {
+        return new Promise((resolve, reject) => {
+            this.findProUserById(proUserId)
+                .then((proUser) => {
+                    this.findShopById(proUser.id, shopId)
+                        .then((shop) => {
+                            this.findProductById(proUserId, shopId, productId)
+                                .then((product) => {
+                                    const indexOfProduct = shop.products.indexOf(product);
+
+                                    shop.products.splice(indexOfProduct, 1);
+
+                                    return resolve(product);
+                                });
+                        });
+                });
+        });
     }
 };
 

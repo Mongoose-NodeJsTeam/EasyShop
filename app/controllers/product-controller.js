@@ -28,6 +28,15 @@ module.exports = function () {
             );
 
             res.redirect('/shop/' + shopId);
+        },
+        deleteProduct(req, res) {
+            const proUserId = req.user.id;
+            const shopId = req.params.shopId;
+            const productId = req.params.id;
+
+            proUserData.proUsers.deleteProductById(proUserId, shopId, productId);
+
+            res.redirect('/shop/' + shopId);
         }
     };
 };
