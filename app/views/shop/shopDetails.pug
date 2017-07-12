@@ -5,11 +5,22 @@ block app-title
 
 
 block content
-    .container-fluid
-        h2.text-center #{shop.name}
+    h2.text-center #{shop.name}
         if shop.products.length > 0
-            h4 Products: #{shop.products.length}
-            a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product
+            .text-center
+                a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product
+            .row.text-center
+                each product in shop.products
+                    .col-md-3.col-sm-6.hero-feature
+                        .thumbnail
+                            img(src='http://placehold.it/800x500', alt='')
+                            .caption
+                                h3 #{product.name}
+                                h5 Price: #{product.price} lv.
+                                h5 Weight: #{product.weight} gr.
+                            .text-center
+                                a.btn.btn-primary(href='#') Edit
+                                a.btn.btn-danger(href='#') Delete
         else
             h4 No products
             a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product

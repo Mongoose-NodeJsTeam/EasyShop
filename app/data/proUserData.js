@@ -25,23 +25,23 @@ const proUsers = {
         return new Promise((resolve, reject) => {
             id = parseInt(id, 10);
 
-            const user =
+            const proUser =
                 proUsersList.find((u) =>
                 u.id === id);
 
-            if (!user) {
+            if (!proUser) {
                 return reject('No pro user found!');
             } else {
-                return resolve(user);
+                return resolve(proUser);
             }
         });
     },
-    findShopById(userId, shopId) {
+    findShopById(proUserId, shopId) {
         return new Promise((resolve, reject) => {
-            userId = parseInt(userId, 10);
+            proUserId = parseInt(proUserId, 10);
             shopId = parseInt(shopId, 10);
 
-            this.findProUserById(userId)
+            this.findProUserById(proUserId)
                 .then((proUser) => {
                     const shop =
                         proUser.shops.find((u) =>
@@ -53,7 +53,7 @@ const proUsers = {
                         return resolve(shop);
                     }
                 });
-        })
+        });
     },
     createProUser(username, password, email){
         return new Promise((resolve, reject) => {

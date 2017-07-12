@@ -8,15 +8,15 @@ const regularUsers = {
     findRegularUserByUsername(username, password) {
         return new Promise((resolve, reject) => {
             const usernameToLower = username.toLowerCase();
-            const user =
+            const reqularUser =
                 regularUsersList.find((u) =>
                 u.username.toLowerCase() === usernameToLower &&
                 u.password === password);
 
-            if (!user) {
+            if (!reqularUser) {
                 return reject('No user found!');
             } else {
-                return resolve(user);
+                return resolve(reqularUser);
             }
         });
     },
@@ -24,14 +24,14 @@ const regularUsers = {
         return new Promise((resolve, reject) => {
             id = parseInt(id, 10);
 
-            const user =
+            const regularUser =
                 regularUsersList.find((u) =>
                 u.id === id);
 
-            if (!user) {
+            if (!regularUser) {
                 return reject('No user found!');
             } else {
-                return resolve(user);
+                return resolve(regularUser);
             }
         });
     },
@@ -39,7 +39,6 @@ const regularUsers = {
         return new Promise((resolve, reject) => {
             const id = parseInt(regularUsersList.length + 1, 10);
 
-            console.log(modelRegularUser);
             const newUser = modelRegularUser.getUser(id, username, password, address, email);
 
             if (!newUser) {

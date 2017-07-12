@@ -12,21 +12,21 @@ const configAuthProUser = (app, data) => {
     passport.use('proUser', new LocalStrategy(
         (username, password, done) => {
             data.proUsers.findProUserByUsername(username, password)
-                .then((user) => {
-                    return done(null, user);
+                .then((proUser) => {
+                    return done(null, proUser);
                 })
                 .catch((err) => {
                     return done(err);
                 });
 
-            passport.serializeUser((user, done) => {
-                done(null, user.id);
+            passport.serializeUser((proUser, done) => {
+                done(null, proUser.id);
             });
 
             passport.deserializeUser(function (id, done) {
                 return data.proUsers.findProUserById(id)
-                    .then((user) => {
-                        done(null, user);
+                    .then((proUser) => {
+                        done(null, proUser);
                     })
                     .catch(done);
             });

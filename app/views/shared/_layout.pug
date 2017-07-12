@@ -8,8 +8,6 @@ html(lang="en")
 
         block scripts
     body
-        div
-            - console.log(user)
         if user
             if user.isRegularUser
                 include ../partials/navigation/_navigation-logedIn-User
@@ -18,6 +16,7 @@ html(lang="en")
         else
             include  ../partials/navigation/_navigation
 
-    block content
+        .container
+            block content
 
-    block additionalBottomScripts
+        block additionalBottomScripts

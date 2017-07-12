@@ -1,19 +1,25 @@
 header
-    nav.navbar.navbar-inverse
-        .container-fluid
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        .container
             .navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
                 a.navbar-brand(href="/") EasyPeasyShop
-            ul.nav.navbar-nav
-                li.active
-                    a(href="/") Home
-                li.active
-                    a(href="/map") Map
-                block autorized-nav-links
-            block auth-options
-                ul.nav.navbar-nav.navbar-right
-                    li
-                        a(href="/auth/sign-in-options")
-                            span.glyphicon.glyphicon-log-in  Sign In
-                    li
-                        a(href="/sign-up/sign-up-options")
-                            span.glyphicon.glyphicon-pencil  Sign Up
+            #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li.active
+                        a(href="/") Home
+                    li.active
+                        a(href="/map") Map
+                    block autorized-nav-links
+                block auth-options
+                    ul.nav.navbar-nav.navbar-right
+                        li
+                            a(href="/auth/sign-in-options")
+                                span.glyphicon.glyphicon-log-in  Sign In
+                        li
+                            a(href="/sign-up/sign-up-options")
+                                span.glyphicon.glyphicon-pencil  Sign Up

@@ -1,6 +1,6 @@
 class TripShop {
-    constructor(user, date) {
-        this.user = user;
+    constructor(regularUser, date) {
+        this.regularUser = regularUser;
         this.date = date;
         this.users = [];
     }

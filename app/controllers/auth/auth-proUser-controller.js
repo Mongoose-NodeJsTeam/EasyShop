@@ -20,7 +20,7 @@ module.exports = function() {
                     });
                 }
 
-                req.login(user, error => {
+                req.logIn(user, error => {
                     if (error) {
                         next(error);
                         return;
