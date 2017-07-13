@@ -3,6 +3,8 @@ extends ../shared/_layout
 block app-title
     title EasyShop: MyShops
 
+    block scripts
+        link(rel="stylesheet", href="/public/css/edit-form.css")
 
 block content
     if user.shops.length > 0
@@ -24,28 +26,47 @@ block content
                         li.list-group-item
                             strong Address:
                             span=  shop.address
+                        li.list-group-item
+                            strong Mobile:
+                            span=  shop.mobile
                     .text-center
-                        a.btn.btn-primary(href='#') Edit
+                        button.btn.btn-primary(data-toggle='modal', data-target='#shopEditModal') Edit
                         a.btn.btn-danger(href='#') Delete
 
-
-
-
-
-
-
-
-
-
-
+            #shopEditModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabel', aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            button.close(type='button', data-dismiss='modal')
+                                span(aria-hidden='true') ×
+                                span.sr-only Close
+                            h3#lineModalLabel.modal-title Edit
+                        .modal-body
+                            form
+                                .form-group
+                                    label(for='editEmail') Email
+                                    input#editEmail.form-control(type='email', name='email')
+                                .form-group
+                                    label(for='editAddress') Address
+                                    input#editAddress.form-control(type='text', name='address')
+                                .form-group
+                                    label(for='editMobile') Mobile
+                                    input#editMobile.form-control(type='text', name='mobile')
+                        .modal-footer
+                            .btn-group.btn-group-justified(role='group', aria-label='group button')
+                                .btn-group(role='group')
+                                    button.btn.btn-default.btn-hover-(type='button', data-dismiss='modal', role='button') Close
+                                .btn-group(role='group')
+                                    button#saveImage.btn.btn-default.btn-hover-green(type='button', data-action='save', role='button') Save
 
     else
         .container
             h3 You dont have any registered shops
             a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
 
-
-
-
 block additionalBottomScripts
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/libs/bootstrap/js/modal.js")
+
+
 
