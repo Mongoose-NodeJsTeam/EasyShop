@@ -26,7 +26,6 @@ $(document).ready(function () {
 
 
         const product = {
-            key:counter,
             id: productId,
             shopId: shopId,
             name: productName,
