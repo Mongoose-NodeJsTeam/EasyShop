@@ -1,0 +1,19 @@
+.container.custom-message-container.text-center
+    .messages
+        each type in Object.keys(messages)
+            if type === 'error'
+                each message in messages[type]
+                    .message-alert.alert.alert-danger
+                        button.close(type='button', data-dismiss='alert') x
+                        strong ERROR!
+                        |     #{message}
+            else
+                each message in messages[type]
+                    .message-alert.alert.alert-success
+                        button.close(type='button', data-dismiss='alert') x
+                        strong SUCCESS!
+                        |     #{message}
+
+script(src="/libs/jquery/dist/jquery.js")
+link(rel="stylesheet", href='/public/css/flashMessages/flashStyles.css')
+script(src="/public/js/flashMessages/flashMsg.js")
