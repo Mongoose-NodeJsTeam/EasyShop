@@ -1,0 +1,65 @@
+extends ./shared/_layout
+
+block content
+    .container
+        .row
+            .col-sm-12.col-md-10.col-md-offset-1
+                table.table.table-hover
+                    thead
+                        tr
+                            th Product
+                            th Quantity
+                            th.text-center Price
+                            th.text-center Total
+                            th  
+                    tbody#bodyTable
+                        if products
+                            each product in products
+                                tr
+                                    td.col-sm-8.col-md-6
+                                        .media
+                                            .media-body
+                                                h4.media-heading
+                                                    input.product(type='text', readonly value=product.name)
+
+                                    td.col-sm-1.col-md-1(style='text-align: center')
+                                        btn.minus -
+                                        btn.plus +
+                                        input.quantity.form-control(type='text', value=product.quantity onchange="quantityChange(this")
+
+                                    td.productPrice.col-sm-1.col-md-1.text-center
+                                        strong=product.price
+                                    td.calculateTotal.col-sm-1.col-md-1.text-center
+                                        strong=product.total
+                                    td.col-sm-1.col-md-1
+                                        button.removeProduct.btn.btn-danger(type='button')
+                                            |  Remove
+
+                            tr
+                                td   
+                                td   
+                                td   
+                                td
+                                    h3 Total
+                                td.text-right
+                                    h3
+                                        strong#TotalBasket $31.53
+                            tr
+                                td   
+                                td   
+                                td   
+                                td
+                                    button.btn.btn-default(type='button')
+                                        span.glyphicon.glyphicon-shopping-cart
+                                        |  Continue Shopping
+                                td
+                                    button.btn.btn-success(type='button')
+                                        | Checkout
+                                        span.glyphicon.glyphicon-play
+                        else
+                            h2 {user.username} +There are no products in your basket, so start shopping
+                            span
+                                a(href='/tripshops/findTripshop') Find your shopper
+block additionalBottomScripts
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/public/js/actionsWithBasket.js")
