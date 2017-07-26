@@ -7,19 +7,24 @@ block app-title
         link(rel="stylesheet", href="/public/css/edit-form.css")
 
 block content
-    if user.shops.length > 0
-        a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
+    if shops.length > 0
+        .text-center
+            a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
+            != messages('flashMessages/flashMessages', locals)
         .row
-            each shop in user.shops
+            each shop in shops
                 .col-md-4.thumbnail
                     img.img-responsive(src='http://placehold.it/700x400', alt='')
-                    h3
-                        a(href='/shop/' + shop.id)= shop.name
-                    p= shop.description
+                    h3.text-center
+                        a(href='/shop/' + shop._id)=shop.name
+                    p.text-center= shop.description
                     ul.list-group.list-group-flush
                         li.list-group-item
                             strong Number of Products:
-                            span=   shop.products.length
+                            if shop.products
+                                span=   shop.products.length
+                            else
+                                span  0
                         li.list-group-item
                             strong Email:
                             span=  shop.email
@@ -30,35 +35,35 @@ block content
                             strong Mobile:
                             span=  shop.mobile
                     .text-center
-                        button.btn.btn-primary(data-toggle='modal', data-target='#shopEditModal') Edit
-                        a.btn.btn-danger(href='#') Delete
+                        button.btn.btn-primary.btnEditShop(data-toggle='modal', data-target='#shopEdit' shopid= shop._id) Edit
+                        button.btn.btn-danger.delShopBtn(shopid= shop._id) Delete
 
-            #shopEditModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabel', aria-hidden='true')
+            #shopEdit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabel', aria-hidden='true')
                 .modal-dialog
                     .modal-content
                         .modal-header
                             button.close(type='button', data-dismiss='modal')
                                 span(aria-hidden='true') ×
                                 span.sr-only Close
-                            h3#lineModalLabel.modal-title Edit
+                            h3#lineModalLabel.modal-title Edit shop info
                         .modal-body
-                            form
+                            form#shopForm
                                 .form-group
-                                    label(for='editEmail') Email
-                                    input#editEmail.form-control(type='email', name='email')
+                                    label#shopLabel(for='editName') Name
+                                    input#editName.form-control(type='name', name='name')
                                 .form-group
-                                    label(for='editAddress') Address
+                                    label#addressLabel(for='editAddress') Address
                                     input#editAddress.form-control(type='text', name='address')
                                 .form-group
-                                    label(for='editMobile') Mobile
+                                    label#emailLabel(for='editEmail') Email
+                                    input#editEmail.form-control(type='email', name='email')
+                                .form-group
+                                    label#mobileLabel(for='editMobile') Mobile
                                     input#editMobile.form-control(type='text', name='mobile')
-                        .modal-footer
-                            .btn-group.btn-group-justified(role='group', aria-label='group button')
-                                .btn-group(role='group')
-                                    button.btn.btn-default.btn-hover-(type='button', data-dismiss='modal', role='button') Close
-                                .btn-group(role='group')
-                                    button#saveImage.btn.btn-default.btn-hover-green(type='button', data-action='save', role='button') Save
-
+                                .form-group
+                                    label#descriptionLabel(for='editDescription') Description
+                                    input#editDescription.form-control(type='text', name='description')
+                                button#submitEditShop.btn.btn-success(type='submit') Save
     else
         .container
             h3 You dont have any registered shops
@@ -67,6 +72,8 @@ block content
 block additionalBottomScripts
     script(src="/libs/jquery/dist/jquery.js")
     script(src="/libs/bootstrap/js/modal.js")
-
+    script(src="/public/js/shopEdit-Modal.js")
+    script(src="/libs/jquery-validation/dist/jquery.validate.js")
+    script(src="/public/js/validators/shop-validator.js")
 
 
