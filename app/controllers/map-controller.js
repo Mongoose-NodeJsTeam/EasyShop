@@ -1,17 +1,21 @@
-module.exports = function() {
-    return {
-        loadMapPage(req, res) {
-            return Promise.resolve()
-                .then(() => {
-                    if (!req.isAuthenticated()) {
-                        res.render('mapPage', {});
-                    } else {
-                        res.status(200)
-                            .render('mapPage', {
-                                user: req.user
-                            });
-                    }
+class MapController {
+    constructor(data) {
+        this.data = data;
+    }
+
+    loadMapPage(req, res) {
+        if (!req.isAuthenticated()) {
+            res.render('mapPage', {});
+        } else {
+            res.render('mapPage', {
+                    user: req.user
                 });
         }
-    };
+    }
+}
+
+const init = (data) => {
+    return new MapController(data);
 };
+
+module.exports = { init, };
