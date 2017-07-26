@@ -1,0 +1,26 @@
+extends ../shared/_layout
+
+
+block content
+
+        if trips.length
+            each trip in trips
+                .col-md-4.thumbnail
+                    img.img-responsive(src='http://placehold.it/700x400', alt='')
+                    p=trip.user.username
+                    p= trip.date
+                    ul.list-group.list-group-flush
+                        li.list-group-item
+                            strong Shop:
+                                span= trip.shop.name
+
+                    .text-center
+                        a.btn.btn-lg.btn-primary(href='/shop/'+trip.shop._id) See products
+
+        else
+            .container
+                h3 Sorry there are no trips in this moment
+                h4 do you want to create one?
+                a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop
+
+
