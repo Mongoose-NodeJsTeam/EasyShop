@@ -20,7 +20,8 @@ class BasketController {
 
 
         res.render('basket', {
-            products: arr
+            products: arr,
+            user:user
         });
     }
 
