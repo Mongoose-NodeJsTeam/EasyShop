@@ -1,6 +1,7 @@
 /* globals $ */
 
 calculateTotal();
+
 $('.plus').click(function (e) {
     let $target = $(e.target);
 
@@ -61,7 +62,51 @@ function calculateTotal() {
         let $prod = $(totalsEachProduct[i]);
         let subTotal = Number($prod.text());
         sum = Number(sum) + Number(subTotal);
+        sum.toFixed(2);
 
     }
-    $('#TotalBasket').text(sum);
+    $('#TotalBasket').text(sum);//must set lenght to 2
 }
+
+$('#ContinueShop').click(function () {
+    let allProductsinBasket = $('.productInBasket');
+    let productKeysInBasket = [];
+
+    for (let i = 0; i < allProductsinBasket.length; i++) {
+        let productKey = $(allProductsinBasket[i]).attr('data');
+        productKeysInBasket.push(productKey);
+
+        let $prod = $('.productInBasket').filter(function () {
+            return $(this).attr('data') === productKey;
+        });
+
+        let input = $prod.next().children()[2].value;
+
+        let productInLocal = JSON.parse(localStorage[productKey]);
+        if (allProductsinBasket[i].quantity === 0) {
+            localStorage.removeItem(productKey)
+        }
+        else {
+            productInLocal.quantity = Number(input);
+            productInLocal.total = Number(productInLocal.price) * Number(input);
+
+            localStorage[productKey] = JSON.stringify(productInLocal);
+        }
+
+    }
+    let keysLocalStorage = Object.keys(localStorage);
+    for (let key of keysLocalStorage) {
+        let matched=false;
+        if (Number(key)) {
+            for (let basketKey of productKeysInBasket) {
+
+                if (basketKey === key) {
+                    matched=true;
+                }
+
+            }
+            if(!matched){localStorage.removeItem(key);}
+
+        }
+    }
+});
