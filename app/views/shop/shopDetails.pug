@@ -9,6 +9,7 @@ block content
         if shop.products && shop.products.length > 0
             .text-center
                 a.btn.btn-lg.btn-primary(href='/shop/' + shop._id + '/add-product') Add product
+                != messages('flashMessages/flashMessages', locals)
             .row.text-center
                 each product in shop.products
                     include ../partials/shop/_shopProductsTempl
@@ -37,6 +38,8 @@ block content
                                         input#editWeight.form-control(type='text', name='weight')
                                     button#submitEditProduct.btn.btn-success(type='submit') Save
         else
+            .text-center
+                != messages('flashMessages/flashMessages', locals)
             h4 No products
             a.btn.btn-lg.btn-primary(href='/shop/' + shop._id + '/add-product') Add product
     else
