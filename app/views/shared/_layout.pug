@@ -5,11 +5,10 @@ html(lang="en")
         block app-title
         link(rel="stylesheet", href="/libs/bootstrap/dist/css/bootstrap.css")
         link(rel="stylesheet", href="/public/css/main.css")
-
         block scripts
     body
         if user
-            if user.isRegularUser
+            if !user.isProUser
                 include ../partials/navigation/_navigation-logedIn-User
             else
                 include ../partials/navigation/_navigation-logedIn-Shop
