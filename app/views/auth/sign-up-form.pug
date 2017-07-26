@@ -1,0 +1,47 @@
+extends ../shared/_layout
+
+block app-title
+    title EasyPeasyShop: Sign up
+
+block scripts
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/libs/jquery-validation/dist/jquery.validate.js")
+    script(src="/public/js/validators/signup-validator.js")
+
+block content
+    .modal-dialog
+        .modal-content
+            .modal-header
+                h3.text-center Register new user
+            .modal-body
+                .wrapper
+                    form#userSignUpForm(action='sign-up', method='post')
+                        .form-group
+                            .input-group#usernameInputGroup
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-user
+                                input.form-control.input-lg(type='text', placeholder='Username', name='username')
+                        .form-group
+                            .input-group#emailInputGroup
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-envelope
+                                input.form-control.input-lg(type='email', placeholder='Email', name='email')
+                        .form-group
+                            .input-group#addressInputGroup
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-home
+                                input.form-control.input-lg(type='text', placeholder='Address', name='address')
+                        .form-group
+                            .input-group#passwordInputGroup
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-lock
+                                input.form-control.input-lg(type='password', placeholder='Password', name='password')
+                        .form-group
+                            .input-group
+                                label
+                                    input(type='checkbox', name='isProUser')
+                                    |  Are you professional?
+                        .form-group.text-center
+                            input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Register')
+                            span.text-center
+
