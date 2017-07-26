@@ -107,7 +107,6 @@ class ShopController {
                 req.flash(
                     'success',
                     'Shop was successfully updated');
-                // return res.redirect('/shop/my-shops');
                 return res.send({ locationUrl: '/shop/my-shops' });
             })
             .catch((err) => {
@@ -121,7 +120,10 @@ class ShopController {
 
         this.data.shops.deleteById(shopId)
             .then(() => {
-                return res.redirect('/shop/my-shops');
+                req.flash(
+                    'success',
+                    'Shop was successfully deleted');
+                return res.send({ locationUrl: '/shop/my-shops' });
             });
     }
 }

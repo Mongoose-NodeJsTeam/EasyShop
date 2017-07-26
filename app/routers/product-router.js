@@ -9,7 +9,7 @@ const attachTo = (app, data) => {
     productRouter
         .get('/add-product', productController.loadProductForm
             .bind(productController))
-        .post('/add-product', productController.createProductForShop
+        .post('/add-product', productController.createProduct
             .bind(productController))
         //Ajax routes
         .get('/update-product/:productId', productController.loadProductInfo
