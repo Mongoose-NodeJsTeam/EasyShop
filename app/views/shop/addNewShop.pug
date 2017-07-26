@@ -4,7 +4,9 @@ block app-title
     title EasyShop: Add new shop
 
 block scripts
-    link(rel="stylesheet", href="/public/css/addingForms.css")
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/libs/jquery-validation/dist/jquery.validate.js")
+    script(src="/public/js/validators/shop-validator.js")
 
 block content
     section#contact
@@ -13,23 +15,24 @@ block content
                 | Create new shop
         .contact-section
             .container
-                form(action='/shop/add-shop', method='post')
+                form#shopForm(action='/shop/add-shop', method='post')
                     .col-md-6.form-line
                         .form-group
-                            label(for='name') Shop name
-                            input.form-control(type='text', id='name', name='name', placeholder='Shop Name')
+                            label#shopLabel(for='name') Shop name
+                            input.form-control(type='text', id='name', name='name', placeholder='ex: "Billa"')
                         .form-group
-                            label(for='address') Address
-                            input#address.form-control(type='text', name='address', placeholder='Address: No, street, country')
+                            label#addressLabel(for='address') Address
+                            input#address.form-control(type='text', name='address', placeholder='ex: "74 Aleksandar Malinov Sofia Bulgaria"')
                         .form-group
-                            label(for='email') Email
-                            input#email.form-control(type='email', name='email', placeholder='Shop email')
+                            label#emailLabel(for='email') Email
+                            input#email.form-control(type='email', name='email', placeholder='ex: "billa@gmail.com"')
                     .col-md-6
                         .form-group
-                            label(for='tel') Mobile No.
-                            input#tel.form-control(type='tel', name='mobile', placeholder='Mobile number')
+                            label#mobileLabel(for='tel') Mobile No.
+                            input#tel.form-control(type='tel', name='mobile', placeholder='ex: 0896716622')
                         .form-group
-                            label(for='description')  Description
-                            textarea#description.form-control(name='description', placeholder='Shop description')
+                            label#descriptionLabel(for='description')  Description
+                            textarea#description.form-control(name='description', placeholder='Short description, slogan')
                         div
                             input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Create')
+        != messages('flashMessages/flashMessages', locals)
