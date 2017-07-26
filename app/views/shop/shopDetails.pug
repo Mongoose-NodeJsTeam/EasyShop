@@ -3,24 +3,56 @@ extends ../shared/_layout
 block app-title
     title EasyPeasyShop #{shop.name}
 
-
 block content
-    h2.text-center #{shop.name}
-        if shop.products.length > 0
+    if user.isProUser
+        h2.text-center= shop.name
+        if shop.products && shop.products.length > 0
             .text-center
-                a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product
+                a.btn.btn-lg.btn-primary(href='/shop/' + shop._id + '/add-product') Add product
             .row.text-center
                 each product in shop.products
-                    .col-md-3.col-sm-6.hero-feature
-                        .thumbnail
-                            img(src='http://placehold.it/800x500', alt='')
-                            .caption
-                                h3 #{product.name}
-                                h5 Price: #{product.price} lv.
-                                h5 Weight: #{product.weight} gr.
-                            .text-center
-                                a.btn.btn-primary(href='#') Edit
-                                a.btn.btn-danger(href='/shop/' + shop.id + '/product/delete-product/' + product.id) Delete
+                    include ../partials/shop/_shopProductsTempl
+                        .text-center
+                            button.btn.btn-primary.btnEditProduct(data-toggle='modal', data-target='#productEdit' shopid= shop._id productid= product._id) Edit
+                            button.btn.btn-danger.delProductBtn(shopid= shop._id productid= product._id) Delete
+
+                #productEdit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabel', aria-hidden='true')
+                    .modal-dialog
+                        .modal-content
+                            .modal-header
+                                button.close(type='button', data-dismiss='modal')
+                                    span(aria-hidden='true') ×
+                                    span.sr-only Close
+                                h3#lineModalLabel.modal-title Edit product
+                            .modal-body.text-left
+                                form#productForm
+                                    .form-group
+                                        label#nameLabel(for='editName') Name
+                                        input#editName.form-control(type='name', name='name')
+                                    .form-group
+                                        label#priceLabel(for='editPrice') Price
+                                        input#editPrice.form-control(type='text', name='price')
+                                    .form-group
+                                        label#weightLabel(for='editWeight') Weight
+                                        input#editWeight.form-control(type='text', name='weight')
+                                    button#submitEditProduct.btn.btn-success(type='submit') Save
         else
             h4 No products
-            a.btn.btn-lg.btn-primary(href='/shop/' + shop.id + '/product/add-product') Add product
+            a.btn.btn-lg.btn-primary(href='/shop/' + shop._id + '/add-product') Add product
+    else
+        h2.text-center= shop.name
+        .row.text-center
+            each product in shop.products
+                include ../partials/shop/_shopProductsTempl
+                    .text-center
+                        input.quantitySetter.form-control(type='number', value = 0, name='quantity')
+                        a.addProductButton.addToBasket.btn.btn-lg.btn-primary(data-id=product._id, data-shop=shop._id, data-name=product.name, data-price=product.price,
+                        data-weight=product.weight, data-quantity=value) Add product
+
+block additionalBottomScripts
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/libs/bootstrap/js/modal.js")
+    script(src="/public/js/productEdit-Modal.js")
+    script(src="/libs/jquery-validation/dist/jquery.validate.js")
+    script(src="/public/js/validators/product-validator.js")
+    script(src="/public/js/addToBasket.js")
