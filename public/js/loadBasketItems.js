@@ -18,12 +18,16 @@ $(document).ready(function () {
                     "content-type": "application/json"
                 }
             });
-        for (let i = 1; i < localStorage.length; i++) {
+        let keysLocalStorage=Object.keys(localStorage);
 
-            $('<input>').attr('type', 'hidden')
-                .attr('name', "product" + i)
-                .attr('value', (localStorage.getItem(i.toString())))
-                .appendTo(form)
+        for (let key of keysLocalStorage) {
+            if (Number(key)) {
+
+                $('<input>').attr('type', 'hidden')
+                    .attr('name', "product" + key)
+                    .attr('value', (localStorage.getItem(key)))
+                    .appendTo(form)
+            }
 
         }
 
