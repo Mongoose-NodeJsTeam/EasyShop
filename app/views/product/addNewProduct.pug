@@ -4,7 +4,9 @@ block app-title
     title EasyShop: Add new product
 
 block scripts
-    link(rel="stylesheet", href="/public/css/addingForms.css")
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/libs/jquery-validation/dist/jquery.validate.js")
+    script(src="/public/js/validators/product-validator.js")
 
 block content
     section#contact
@@ -13,17 +15,17 @@ block content
                 | Add new product to #{shop.name}
         .contact-section
             .container
-                form(action='/shop/' + shop.id + '/product/add-product', method='post')
+                form#productForm(action='/shop/' + shop._id+ '/add-product', method='post')
                     .col-md-6.form-line
                         .form-group
-                            label(for='name') Product name
+                            label#nameLabel(for='name') Product name
                             input.form-control(type='text', id='name', name='name', placeholder='Product name')
                         .form-group
-                            label(for='price') Price
+                            label#priceLabel(for='price') Price
                             input.form-control(type='text', id='price', name='price', placeholder='Price')
                     .col-md-6.form-line
                         .form-group
-                            label(for='weight') Weight
+                            label#weightLabel(for='weight') Weight
                             input.form-control(type='text', id='weight', name='weight', placeholder='Weight')
                         div
                             input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Add')
