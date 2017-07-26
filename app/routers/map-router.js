@@ -1,8 +1,8 @@
 const express = require('express');
 
 
-module.exports = function(app) {
-    const mapController = require('../controllers/map-controller')();
+const attachTo = (app, data) => {
+    const mapController = require('../controllers/map-controller').init(data);
 
     const mapRouter = new express.Router();
 
@@ -11,3 +11,5 @@ module.exports = function(app) {
 
     app.use('/map', mapRouter);
 };
+
+module.exports = { attachTo };
