@@ -1,0 +1,39 @@
+extends ../shared/_layout
+
+
+block content
+
+    if user.tripshops
+        a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add trip
+        .row
+
+            each trip in user.tripshops
+
+
+                .col-md-4.thumbnail
+                    img.img-responsive(src='http://placehold.it/700x400', alt='')
+                    h3
+                        a(href='/tripshops/' + trip._id)
+                    p= trip.date
+                    ul.list-group.list-group-flush
+                        li.list-group-item
+                            strong Shop:
+
+                                span= trip.shop.name
+                        li.list-group-item
+                            strong Buyers:
+                            if trip.buyers
+                                span= trip.buyers.length
+                            else
+                                span  0
+
+                    .text-center
+                        button.btn.btn-primary(data-toggle='modal', data-target='#shopEditModal') Edit
+                        a.btn.btn-danger(href='#') Delete
+
+
+
+    else
+        .container
+            h3 there are no tripshops for the moment,create one?
+            a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop
