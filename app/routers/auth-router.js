@@ -1,21 +1,23 @@
 const express = require('express');
 const passport = require('passport');
 
-module.exports = (app) => {
-    const authController = require('../controllers/auth/auth-controller')();
-    const authRegularUserController = require('../controllers/auth/auth-regularUser-controller')();
-    const authProUserController = require('../controllers/auth/auth-proUser-controller')();
 
+const attachTo = (app, data) => {
     const authRouter = new express.Router();
+    const authController = require('../controllers/auth-controller').init(data);
 
     authRouter
-        .get('/sign-in-options', authController.loadSignInOptions)
-        .get('/sign-in-regularUser', authRegularUserController.loadSignInRegularUserForm)
-        .post('/sign-in-regularUser', authRegularUserController.loginRegularUser)
-        .get('/sign-in-proUser', authProUserController.loadSignInProUserForm)
-        .post('/sign-in-proUser', authProUserController.loginProUser)
-        .get('/logout-proUser', authController.logout)
-        .get('/logout-regularUser', authController.logout);
+        .get('/sign-up', authController.getSignUpForm)
+        .post('/sign-up', authController.signUp.bind(authController))
+        .get('/sign-in', authController.getSignInForm)
+        .post('/sign-in', passport.authenticate('local', {
+            successRedirect: '/',
+            failureRedirect: '/auth/sign-in',
+            failureFlash: true
+        }))
+        .get('/logout', authController.signOut);
 
     app.use('/auth', authRouter);
 };
+
+module.exports = { attachTo };
