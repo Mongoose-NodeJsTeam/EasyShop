@@ -15,17 +15,22 @@ class ProductController {
             });
     }
 
-    createProductForShop(req, res) {
+    createProduct(req, res) {
         const shopId = req.params.id;
-
         const productData = req.body;
+        productData.shopId = shopId;
 
-        const product = this.data.
-            products.createNewProduct(shopId, productData);
-
-        this.data.shops.assignProductToShop(shopId, product)
-            .then(() => {
-                res.redirect('/shop/' + shopId);
+        return this.data.products.create(productData)
+            .then((product) => {
+                this.data.shops.assignProductToShop(shopId, product)
+                    .then(() => {
+                        req.flash('success', 'Product successfully added!');
+                        res.redirect('/shop/' + shopId);
+                    });
+            })
+            .catch((err) => {
+                req.flash('error', err);
+                res.redirect('/shop/' + shopId + '/add-product');
             });
     }
 
@@ -47,10 +52,21 @@ class ProductController {
 
         return Promise.all([
             this.data.products.updateProductById(productId, productEditData),
-            this.data.shops.updateProductInShop(shopId, productId, productEditData)
+            this.data.shops.updateProductInShop(
+                shopId,
+                productId,
+                productEditData)
         ])
             .then(() => {
-                return res.redirect('/shop/' + shopId);
+                req.flash(
+                    'success',
+                    'Product successfully updated!');
+
+                return res.send({ locationUrl: '/shop/' + shopId });
+            })
+            .catch((err) => {
+                req.flash('error', err);
+                return res.send({ locationUrl: '/shop/' + shopId });
             });
     }
 
@@ -63,7 +79,15 @@ class ProductController {
             this.data.shops.deleteProductFromShop(shopId, productId)
         ])
             .then(() => {
-                return res.redirect('/shop/' + shopId);
+                req.flash(
+                    'success',
+                    'Product successfully deleted!');
+
+                return res.send({ locationUrl: '/shop/' + shopId });
+            })
+            .catch((err) => {
+                req.flash('error', err);
+                return res.send({ locationUrl: '/shop/' + shopId });
             });
     }
 }
