@@ -1,7 +1,7 @@
 const express = require('express');
 
-module.exports = function(app) {
-    const homeController = require('../controllers/home-controller')();
+const attachTo = (app, data) => {
+    const homeController = require('../controllers/home-controller').init(data);
 
     const homeRouter = new express.Router();
 
@@ -10,3 +10,5 @@ module.exports = function(app) {
 
     app.use('/', homeRouter);
 };
+
+module.exports = { attachTo };
