@@ -7,15 +7,6 @@ class ProductData extends BaseData {
         super(db, Product);
     }
 
-    createNewProduct(shopId, model) {
-        const newProduct = Product.toViewModel(model);
-        newProduct.shopId = shopId;
-
-        this.collection.insertOne(newProduct);
-
-        return newProduct;
-    }
-
     updateProductById(productId, newProductData) {
         return this.collection.updateOne(
             { _id: new ObjectID(productId) },

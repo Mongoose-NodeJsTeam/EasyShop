@@ -46,8 +46,8 @@ $(document).ready(function() {
             method: 'GET',
             url: '/shop/' + shopId + '/delete-shop',
             data: {},
-            success: () => {
-                window.location = '/shop/my-shops';
+            success: (result) => {
+                window.location = result.locationUrl;
             }
         });
     });

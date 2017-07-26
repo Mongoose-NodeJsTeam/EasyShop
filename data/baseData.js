@@ -34,7 +34,7 @@ class BaseData {
 
     updateById(model) {
         return this.collection.updateOne({
-            _id: model._id,
+            _id: model.id
         }, model);
     }
 

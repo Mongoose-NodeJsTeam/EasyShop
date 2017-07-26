@@ -28,8 +28,8 @@ $(document).ready(function() {
                     method: 'POST',
                     url: '/shop/' + shopId + '/update-product/' + productId,
                     data: $('#productForm').serialize(),
-                    success: () => {
-                        window.location = '/shop/' + shopId;
+                    success: (result) => {
+                        window.location = result.locationUrl;
                     }
                 });
             });
@@ -46,8 +46,8 @@ $(document).ready(function() {
             method: 'GET',
             url: '/shop/' + shopId + '/delete-product/' + productId,
             data: {},
-            success: () => {
-                window.location = '/shop/' + shopId;
+            success: (result) => {
+                window.location = result.locationUrl;
             }
         });
     });
