@@ -2,15 +2,25 @@ extends _navigation
 
 block autorized-nav-links
     li.active
-        a(href="/profile") Tripshops
+        a(href="/tripshops") MyTripshops
     li.active
         a(href="/profile") Shops
+    li.active
+        a(href="/tripshops/findTripshop") Find Tripshops
 
 block auth-options
     ul.nav.navbar-nav.navbar-right
-        li
+         li
             a(href="/profile")
                 span.glyphicon.glyphicon-user= ' ' + user.username
-        li
-            a(href="/auth/logout-regularUser")
+         li
+            form(action='basket', method='post')
+            a#loadShoppingCart(type= 'submit')
+                span.glyphicon.glyphicon-shopping-cart
+         li
+            a(href="/auth/logout")
                 span.glyphicon.glyphicon-log-out  LogOut
+
+block additionalBottomScripts
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/public/js/loadBasketItems.js")
