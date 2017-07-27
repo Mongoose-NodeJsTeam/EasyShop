@@ -50,6 +50,10 @@ class AuthController {
                     throw Error('User already exist, choose another username');
                 }
 
+                if (this.data.users.checkIfEmailAlreadyExists(input.email)) {
+                    throw Error('Email already exists!');
+                }
+
                 return this.data.users.create(input);
             })
             .then(() => {

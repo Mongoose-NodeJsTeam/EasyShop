@@ -30,7 +30,15 @@ class UsersData extends BaseData {
     }
 
     checkIfEmailAlreadyExists(email) {
+        const props = { email: email };
 
+        return this.filterBy(props)
+            .then((emails) => {
+                if (emails) {
+                    return true;
+                }
+                return false;
+            });
     }
 
     assignTripshoptoUser(user, tripshop) {
@@ -44,12 +52,12 @@ class UsersData extends BaseData {
             });
         } else {
             return this.collection.updateOne({
-                    _id: new ObjectID(user._id)
-                }, {
-                    $set: {
-                        tripshops: [tripshop]
-                    }
-                });
+                _id: new ObjectID(user._id)
+            }, {
+                $set: {
+                    tripshops: [tripshop]
+                }
+            });
         }
     }
 }
