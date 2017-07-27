@@ -3,9 +3,9 @@ const ModelsValidator = require('../app/utils/models-validator');
 class Shop {
     static validator(model) {
         if (ModelsValidator._validateString(
-                model.name, 1, 20, /[a-zA-Z0-9_\\.]/) &&
+                model.name, 1, 20, /^[a-zA-Z0-9_\\.]+$/) &&
             ModelsValidator._validateString(
-                model.address, 10, 60, /[a-zA-Z0-9_\\.]/) &&
+                model.address, 10, 60, /^[a-zA-z\d\s\\.\-]+$/) &&
             ModelsValidator._validateEmail(
                 model.email) &&
             ModelsValidator._validateMobile(
