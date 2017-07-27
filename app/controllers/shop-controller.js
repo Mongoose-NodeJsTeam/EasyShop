@@ -132,5 +132,5 @@ const init = (data) => {
     return new ShopController(data);
 };
 
-module.exports = {init};
+module.exports = { init };
 

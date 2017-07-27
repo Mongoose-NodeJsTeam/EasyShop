@@ -9,6 +9,7 @@ block scripts
     script(src="/public/js/validators/login-validator.js")
 
 block content
+    != messages('flashMessages/flashMessages', locals)
     .modal-dialog
         .modal-content
             .modal-header

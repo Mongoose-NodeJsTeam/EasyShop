@@ -29,6 +29,10 @@ class UsersData extends BaseData {
             });
     }
 
+    checkIfEmailAlreadyExists(email) {
+
+    }
+
     assignTripshoptoUser(user, tripshop) {
         if (user.tripshops) {
             return this.collection.updateOne({

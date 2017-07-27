@@ -15,7 +15,7 @@ block content
             each shop in shops
                 .col-md-4.thumbnail
                     img.img-responsive(src='http://placehold.it/700x400', alt='')
-                    h3.text-center
+                    h3.text-centers
                         a(href='/shop/' + shop._id)=shop.name
                     p.text-center= shop.description
                     ul.list-group.list-group-flush
@@ -66,6 +66,7 @@ block content
                                 button#submitEditShop.btn.btn-success(type='submit') Save
     else
         .container
+            != messages('flashMessages/flashMessages', locals)
             h3 You dont have any registered shops
             a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
 

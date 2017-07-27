@@ -4,6 +4,7 @@ block app-title
     title EasyShop: Welcome
 
 block content
+    != messages('flashMessages/flashMessages', locals)
     .row
         .col-12
             h1#homePage-header
