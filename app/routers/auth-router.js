@@ -10,11 +10,7 @@ const attachTo = (app, data) => {
         .get('/sign-up', authController.getSignUpForm)
         .post('/sign-up', authController.signUp.bind(authController))
         .get('/sign-in', authController.getSignInForm)
-        .post('/sign-in', passport.authenticate('local', {
-            successRedirect: '/',
-            failureRedirect: '/auth/sign-in',
-            failureFlash: true
-        }))
+        .post('/sign-in', authController.signIn)
         .get('/logout', authController.signOut);
 
     app.use('/auth', authRouter);

@@ -1,24 +1,13 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const cookieParser = require('cookie-parser');
 
+const localStrategy = require('./local-strategy');
 const constant = require('../../utils/app-constants');
 
 const applyTo = (app, data) => {
-    passport.use(new LocalStrategy((username, password, done) => {
-        data.users.checkPassword(username, password)
-            .then(() => {
-                return data.users.findByUsername(username);
-            })
-            .then((user) => {
-                done(null, user);
-            })
-            .catch((err) => {
-                done(err);
-            });
-    }));
+    localStrategy.applyTo(passport, data);
 
     app.use(cookieParser(constant.sessionSecret));
 
