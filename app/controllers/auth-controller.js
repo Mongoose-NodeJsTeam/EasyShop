@@ -44,20 +44,19 @@ class AuthController {
         req.body.isProUser = Boolean(req.body.isProUser);
         const input = req.body;
 
-        this.data.users.findByUsername(input.username)
-            .then((user) => {
-                if (user) {
+        return Promise.all([
+            this.data.users.findByUsername(input.username),
+            this.data.users.checkIfEmailAlreadyExists(input.email)
+        ])
+            .then(([foundUserbyUsername]) => {
+                if (foundUserbyUsername) {
                     throw Error('User already exist, choose another username');
                 }
 
-                if (this.data.users.checkIfEmailAlreadyExists(input.email)) {
-                    throw Error('Email already exists!');
-                }
-
-                return this.data.users.create(input);
+                this.data.users.create(input);
             })
             .then(() => {
-                req.flash('success', 'Signed up successful! Please sign in!')
+                req.flash('success', 'Signed up successful! Please sign in!');
                 return res.redirect('sign-in');
             })
             .catch((err) => {
@@ -65,6 +64,7 @@ class AuthController {
                 res.redirect(req.get('referer'));
             });
     }
+
 
     signOut(req, res) {
         req.logout();

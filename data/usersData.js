@@ -32,12 +32,13 @@ class UsersData extends BaseData {
     checkIfEmailAlreadyExists(email) {
         const props = { email: email };
 
-        return this.filterBy(props)
-            .then((emails) => {
-                if (emails) {
-                    return true;
+        return this.collection.findOne(props)
+            .then((user) => {
+                if (user) {
+                    throw new Error('Email already exists!');
                 }
-                return false;
+
+                return true;
             });
     }
 
