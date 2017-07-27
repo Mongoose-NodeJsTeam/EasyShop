@@ -36,7 +36,7 @@ class ModelsValidator {
     }
 
     static _validatePrice(value) {
-        const rgxPrice = /^-?(\d{1,2})(\.\d{1,2})*?$/;
+        const rgxPrice = /^\d{1,3}$/;
 
         if (!rgxPrice.test(value)) {
             return false;
@@ -50,7 +50,7 @@ class ModelsValidator {
     }
 
     static _validateWeight(value) {
-        const rgxWeight = /^-?(\d{1,2})(\.\d{1,3})*?$/;
+        const rgxWeight = /^\d{1,4}$/;
 
         if (!rgxWeight.test(value)) {
             return false;

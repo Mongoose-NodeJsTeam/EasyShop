@@ -3,7 +3,7 @@ const ModelsValidator = require('../app/utils/models-validator');
 class Product {
     static validator(model) {
         if (ModelsValidator._validateString(
-                model.name, 1, 20, /[a-zA-Z]/) &&
+                model.name, 1, 20, /^[a-zA-Z\s]+$/) &&
             ModelsValidator._validatePrice(model.price) &&
             ModelsValidator._validateWeight((model.weight))) {
             return true;
