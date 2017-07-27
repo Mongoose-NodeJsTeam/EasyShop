@@ -28,7 +28,6 @@ class ModelsValidator {
 
     static _validateMobile(value) {
         const rgxMobile = /^0{1}[0-9]{9}$/;
-
         if (!rgxMobile.test(value)) {
             return false;
         }
