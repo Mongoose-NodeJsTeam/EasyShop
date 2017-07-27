@@ -17,7 +17,7 @@ class ModelsValidator {
     }
 
     static _validateEmail(value) {
-        const rexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const rexEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
         if (!rexEmail.test(value)) {
             return false;

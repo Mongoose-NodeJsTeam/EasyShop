@@ -3,11 +3,11 @@ const ModelsValidator = require('../app/utils/models-validator');
 class User {
     static validator(model) {
         if (ModelsValidator._validateString(
-                model.username, 2, 15, /[a-zA-Z0-9_\\.]/) &&
+                model.username, 2, 15, /^[a-zA-Z0-9_\\.]+$/) &&
             ModelsValidator._validateEmail(
                 model.email) &&
             ModelsValidator._validateString(
-                model.address, 10, 60, /[a-zA-Z0-9_\\.]/) &&
+                model.address, 10, 60, /^[a-zA-z\d\s\\.\-]+$/) &&
             ModelsValidator._validatePassword(
                 model.password)) {
             return true;
