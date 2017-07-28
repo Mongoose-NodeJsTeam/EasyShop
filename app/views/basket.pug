@@ -7,24 +7,25 @@ block content
                 table.table.table-hover
                     thead
                         tr
+                            th#dataTrip=date
+                            th Shopper
                             th Product
                             th Quantity
                             th.text-center Price
                             th.text-center Total
                             th  
                     tbody#bodyTable
-                        if products&&products.length>0
-                            each product in products
-                                tr
-                                    td.productInBasket.col-sm-8.col-md-6('data'=product.key)
-                                        .media
-                                            .media-body
-                                                h4.media-heading
-                                                    input.product( type='text', readonly value=product.name)
 
+                        if products && products.length > 0
+                            each product in products
+                                tr.productsInformation
+                                    td.shopper.col-sm-1.col-md-1(style='text-align: center')
+                                        strong(data-id=product.shopperId)= product.shopper
+                                    td.productInBasket.col-sm-8.col-md-6('data-key'=product.key)
+                                        h3.product.media-heading=product.name
                                     td.col-sm-1.col-md-1(style='text-align: center')
-                                        btn.minus -
-                                        btn.plus +
+                                        btn.minus.alert --
+                                        btn.plus.glyphicon-resize-small ++
                                         input.quantity.form-control(type='text', value=product.quantity onchange="quantityChange(this")
 
                                     td.productPrice.col-sm-1.col-md-1.text-center
@@ -50,17 +51,19 @@ block content
                                 td   
                                 td
 
-                                    a#ContinueShop.btn.btn-default(href='shop/'+products[0].shopId)
+                                    a#ContinueShop.btn.btn-default(href='tripshops/' + tripId)
                                         span.glyphicon.glyphicon-shopping-cart
                                         |  Continue Shopping
                                 td
-                                    button.btn.btn-success(type='button')
+                                    button#checkBasket.btn.btn-success(type='submit')
                                         | Checkout
                                         span.glyphicon.glyphicon-play
                         else
-                            h2 {user.username} +There are no products in your basket, so start shopping
+                            h2 #{user.username}
+                            h3 There are no products in your basket, so start shopping
                             span
                                 a(href='/tripshops/findTripshop') Find your shopper
 block additionalBottomScripts
     script(src="/libs/jquery/dist/jquery.js")
     script(src="/public/js/actionsWithBasket.js")
+    script(src="/public/js/checkOutBasket.js")
