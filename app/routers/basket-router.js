@@ -7,8 +7,10 @@ const attachTo = (app, data) => {
     const basketRouter = new express.Router();
 
     basketRouter
-        
+
         .post('/', basketController.loadBasketPage
+            .bind(basketController))
+        .post('/validate',basketController.basketCheckOut
             .bind(basketController));
 
     app.use('/basket', basketRouter);
