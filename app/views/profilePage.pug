@@ -1,0 +1,24 @@
+extends ./shared/_layout
+
+block content
+    h1 Hello #{user.username}
+    div
+        p #{user.address}
+        p #{user.email}
+        p #{user.isProUser}
+    if user.tripshops
+        each trip in user.tripshops
+            h4=trip.date
+    if user.baskets
+        div Your Commands
+            each basket in user.baskets
+                each product in basket
+                    h5= product.product
+
+
+
+    if user.BuyersBaskets
+        div Your Commands To buy
+            each item in user.BuyersBaskets
+                each product in item.basket
+                    h5= product.product
