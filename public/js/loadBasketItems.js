@@ -20,6 +20,7 @@ $(document).ready(function () {
             });
         let keysLocalStorage=Object.keys(localStorage);
 
+
         for (let key of keysLocalStorage) {
             if (Number(key)) {
 
