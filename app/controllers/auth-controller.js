@@ -16,13 +16,13 @@ class AuthController {
     signIn(req, res, next) {
         const auth = passport.authenticate('local', (error, user) => {
             if (error) {
-                next(error);
-                return;
+                req.flash('error', error);
+                return res.render('auth/sign-in-form');
             }
 
             if (!user) {
-                req.flash('error', 'err');
-                res.redirect('/auth/sign-in-form');
+                req.flash('error', error);
+                return res.render('auth/sign-in-form');
             }
 
             req.login(user, (e) => {
@@ -33,6 +33,7 @@ class AuthController {
 
                 req.flash('success', 'Login successful!');
                 res.redirect('/');
+                return;
             });
         });
 

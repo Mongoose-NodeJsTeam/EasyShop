@@ -18,11 +18,11 @@ class UsersData extends BaseData {
         return this.findByUsername(username)
             .then((user) => {
                 if (!user) {
-                    throw new Error('Invalid user');
+                    return Promise.reject('Invalid user');
                 }
 
                 if (user.password !== password) {
-                    throw new Error('Invalid password');
+                    return Promise.reject('Invalid password');
                 }
 
                 return true;
