@@ -4,18 +4,23 @@ extends ../shared/_layout
 block content
 
         if trips.length
-            each trip in trips
-                .col-md-4.thumbnail
-                    img.img-responsive(src='http://placehold.it/700x400', alt='')
-                    p=trip.user.username
-                    p= trip.date
-                    ul.list-group.list-group-flush
-                        li.list-group-item
-                            strong Shop:
-                                span= trip.shop.name
+                each trip in trips
+                    .col-md-4.thumbnail
+                        img.img-responsive(src='http://placehold.it/700x400', alt='')
+                        .text-center
+                            label(for='shopper') Your Shopper
+                            input.form-control(readonly value=trip.user.username , name='shopper')
+                        .text-center
+                            label(for='tripDate') Date
+                            input.form-control(readonly value=trip.date, name='tripDate')
+                        ul.list-group.list-group-flush
+                            li.list-group-item
+                                strong Shop:
+                                    span= trip.shop.name
 
-                    .text-center
-                        a.btn.btn-lg.btn-primary(href='/shop/'+trip.shop._id) See products
+                        .text-center
+                            a.btn.btn-lg.btn-primary(href='/tripshops/' + trip._id) See products
+
 
         else
             .container
