@@ -61,6 +61,44 @@ class UsersData extends BaseData {
             });
         }
     }
+    addBuyersBasketToUser(user, basket) {
+        if (user.BuyersBaskets) {
+            return this.collection.updateOne({
+                _id: new ObjectID(user._id)
+            }, {
+                $push: {
+                    BuyersBaskets: basket
+                }
+            });
+        } else {
+            return this.collection.updateOne({
+                _id: new ObjectID(user._id)
+            }, {
+                $set: {
+                    BuyersBaskets: [basket]
+                }
+            });
+        }
+    }
+    addBasketToUser(user, basket) {
+        if (user.baskets) {
+            return this.collection.updateOne({
+                _id: new ObjectID(user._id)
+            }, {
+                $push: {
+                    baskets: basket
+                }
+            });
+        } else {
+            return this.collection.updateOne({
+                _id: new ObjectID(user._id)
+            }, {
+                $set: {
+                    baskets: [basket]
+                }
+            });
+        }
+    }
 }
 
 module.exports = UsersData;
