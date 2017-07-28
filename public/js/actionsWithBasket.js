@@ -68,45 +68,56 @@ function calculateTotal() {
     $('#TotalBasket').text(sum);//must set lenght to 2
 }
 
-$('#ContinueShop').click(function () {
-    let allProductsinBasket = $('.productInBasket');
-    let productKeysInBasket = [];
 
-    for (let i = 0; i < allProductsinBasket.length; i++) {
-        let productKey = $(allProductsinBasket[i]).attr('data');
-        productKeysInBasket.push(productKey);
 
-        let $prod = $('.productInBasket').filter(function () {
-            return $(this).attr('data') === productKey;
-        });
+    $('#ContinueShop').click(function () {
+        let allProductsinBasket = $('.productInBasket');
+        let productKeysInBasket = [];
 
-        let input = $prod.next().children()[2].value;
+        for (let i = 0; i < allProductsinBasket.length; i++) {
+            //iterate over table and take all rows,each row=product,take key related in local storage
+            let productKey = $(allProductsinBasket[i]).attr('data-key');
 
-        let productInLocal = JSON.parse(localStorage[productKey]);
-        if (allProductsinBasket[i].quantity === 0) {
-            localStorage.removeItem(productKey)
-        }
-        else {
-            productInLocal.quantity = Number(input);
-            productInLocal.total = Number(productInLocal.price) * Number(input);
+            //productKeysInBasket=array of the keys, matching each product in local storage
+            productKeysInBasket.push(productKey);
 
-            localStorage[productKey] = JSON.stringify(productInLocal);
-        }
+            //select Dom element who cantains the atribute key
+            let $prod = $('.productInBasket').filter(function () {
+                return $(this).attr('data-key') === productKey;
+            });
+            //select quantity from the input field,which is next dom element
+            let input = $prod.next().children()[2].value;
 
-    }
-    let keysLocalStorage = Object.keys(localStorage);
-    for (let key of keysLocalStorage) {
-        let matched=false;
-        if (Number(key)) {
-            for (let basketKey of productKeysInBasket) {
 
-                if (basketKey === key) {
-                    matched=true;
-                }
+            let productInLocal = JSON.parse(localStorage[productKey]);
 
+            //if product quantity is set to 0 in basket=>remove item
+            if (allProductsinBasket[i].quantity === 0) {
+                localStorage.removeItem(productKey)
             }
-            if(!matched){localStorage.removeItem(key);}
+            //update the product in local storage with the correct quantity and total
+            else {
+                productInLocal.quantity = Number(input);
+                productInLocal.total = Number(productInLocal.price) * Number(input);
+
+                localStorage[productKey] = JSON.stringify(productInLocal);
+            }
 
         }
-    }
-});
+        //remove the prodcut drom local storage, if remove from basket
+        //TODO make function for this,almost the same in chechout basket,make one file,instead of two ???
+        let keysLocalStorage = Object.keys(localStorage);
+        for (let key of keysLocalStorage) {
+            let matched = false;
+            if (Number(key)) {
+                for (let basketKey of productKeysInBasket) {
+                    if (basketKey === key) {
+                        matched = true;
+                    }
+                }
+                if (!matched) {
+                    localStorage.removeItem(key);
+                }
+            }
+        }
+    });
