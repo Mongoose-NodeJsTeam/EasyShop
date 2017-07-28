@@ -4,8 +4,6 @@ block app-title
     title EasyPeasyShop: Sign up
 
 block scripts
-    script(src="/libs/jquery/dist/jquery.js")
-    script(src="/libs/jquery-validation/dist/jquery.validate.js")
     script(src="/public/js/validators/signup-validator.js")
 
 block content
@@ -21,7 +19,7 @@ block content
                             .input-group#usernameInputGroup
                                 span.input-group-addon
                                     i.glyphicon.glyphicon-user
-                                input.form-control.input-lg(type='text', placeholder='ex: "pesho1234"', name='username')
+                                input.form-control.input-lg(type='text', placeholder='ex: pesho1234', name='username')
                         .form-group
                             .input-group#emailInputGroup
                                 span.input-group-addon
@@ -36,7 +34,7 @@ block content
                             .input-group#passwordInputGroup
                                 span.input-group-addon
                                     i.glyphicon.glyphicon-lock
-                                input.form-control.input-lg(type='password', placeholder='ex: akula1', name='password')
+                                input.form-control.input-lg(type='password', placeholder='ex: qwerty1', name='password')
                         .form-group
                             .input-group
                                 label
