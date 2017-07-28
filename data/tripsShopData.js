@@ -19,6 +19,26 @@ class TripshopData extends BaseData {
                 return this.ModelClass.toViewModel(modelUpdateData);
             });
     }
+    addBasketToTripshop(tripshop, basket) {
+        if (tripshop.baskets) {
+            return this.collection.updateOne({
+                _id: tripshop._id
+            }, {
+                $push: {
+                    baskets: basket
+                }
+            });
+        } else {
+            return this.collection.updateOne({
+                _id: tripshop._id
+            }, {
+                $set: {
+                    baskets: [basket]
+                }
+            });
+        }
+
+    }
 }
 
 module.exports = TripshopData;
