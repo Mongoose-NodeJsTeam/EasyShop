@@ -9,6 +9,25 @@ class TripshopController {
                 user: req.user
             });
     }
+    loadProducts(req, res) {
+        const user = req.user;
+
+        const tripId = req.params.id;
+
+        return this.data.tripshops. findById(tripId)
+            .then((tripshop)=>{
+                console.log(tripshop);
+                res.render('tripshop/shopperProducts',{
+                    userId:user._id,
+                    shop:tripshop.shop,
+                    products:tripshop.shop.products,
+                    shopper:tripshop.user.username,
+                    shopperId:tripshop.user._id,
+                    date:tripshop.date,
+                    tripId:tripId
+                });
+            });
+    }
 
     loadAllTripshops(req, res) {
         return this.data.tripshops.filterBy({
