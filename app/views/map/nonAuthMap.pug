@@ -1,0 +1,16 @@
+extends ../shared/_layout
+
+block content
+    .row.text-center
+        .col-xs-12
+            h3 You can find
+                strong  #{shops.length} shops
+            h3 and
+                strong  #{tripshops.length} tripshops
+                |   on our map
+            h3 but u have to Sign in ->
+                span
+                    a(href='/auth/sign-in')  Sign in !s
+            h3 Still don't have an Account ->
+                span
+                    a(href='/auth/sign-up')  Sign up
