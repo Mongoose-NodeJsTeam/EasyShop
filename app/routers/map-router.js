@@ -7,6 +7,8 @@ const attachTo = (app, data) => {
     const mapRouter = new express.Router();
 
     mapRouter
+        .get('/loadAuthMapData', mapController.loadAuthMapData.bind(mapController))
+        .get('/nonAuthMap', mapController.loadNonAuthMap.bind(mapController))
         .get('/', mapController.loadMapPage);
 
     app.use('/map', mapRouter);

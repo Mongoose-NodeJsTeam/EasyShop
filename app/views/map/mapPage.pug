@@ -1,0 +1,14 @@
+extends ../shared/_layout
+
+block app-title
+    title EasyShop: Map
+
+block content
+    .row
+        #map
+
+
+block additionalBottomScripts
+    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1WIiqdxhH_jhZrN1W7cQswvajNuWOVvQ")
+    script(src="/public/js/mapping.js")
+
