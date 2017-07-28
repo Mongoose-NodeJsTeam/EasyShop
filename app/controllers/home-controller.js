@@ -13,6 +13,12 @@ class HomeController {
                 });
         }
     }
+    loadProfilePage(req,res){
+        res.status(200)
+            .render('profilePage', {
+                user: req.user
+            });
+    }
 }
 
 const init = (data) => {
