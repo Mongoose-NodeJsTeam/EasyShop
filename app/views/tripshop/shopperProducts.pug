@@ -1,0 +1,17 @@
+extends ../shared/_layout
+
+block content
+    h2.text-center= shop.name
+    h1.text-center Hi There #{shopper} is on #{date} Here !!!
+    .row.text-center
+        each product in products
+            include ../partials/shop/_shopProductsTempl
+                .text-center
+                    input.quantitySetter.form-control(type='number', value = 0, name='quantity')
+                    a.addProductButton.addToBasket.btn.btn-lg.btn-primary(data-Productid=product._id, data-shop=shop._id, data-name=product.name, data-price=product.price,
+                    data-weight=product.weight, data-quantity=value, data-shopper=shopper, data-shopperId=shopperId, data-user=userId, data-tripshopId=tripId, data-date=date) Add product
+
+
+block additionalBottomScripts
+    script(src="/libs/jquery/dist/jquery.js")
+    script(src="/public/js/addToBasket.js")
