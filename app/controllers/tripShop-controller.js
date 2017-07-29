@@ -16,21 +16,22 @@ class TripshopController {
 
         return this.data.tripshops. findById(tripId)
             .then((tripshop)=>{
-                res.render('tripshop/shopperProducts',{
-                    userId:user._id,
-                    shop:tripshop.shop,
-                    products:tripshop.shop.products,
-                    shopper:tripshop.user.username,
-                    shopperId:tripshop.user._id,
-                    date:tripshop.date,
-                    tripId:tripId
+                console.log(tripshop);
+                res.render('tripshop/shopperProducts', {
+                    userId: user._id,
+                    shop: tripshop.shop,
+                    products: tripshop.shop.products,
+                    shopper: tripshop.user.username,
+                    shopperId: tripshop.user.userId,
+                    date: tripshop.date,
+                    tripId: tripId
                 });
             });
     }
 
     loadAllTripshops(req, res) {
         return this.data.tripshops.filterBy({
-            'user._id': {
+            'user.userId': {
                 $ne: req.user._id
             }
         })
