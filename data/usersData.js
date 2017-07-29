@@ -28,6 +28,25 @@ class UsersData extends BaseData {
                 return true;
             });
     }
+    addShopToUser(user, shop) {
+        if (user.shops) {
+            return this.collection.updateOne({
+                _id: new ObjectID(user._id)
+            }, {
+                $push: {
+                    shops: shop
+                }
+            });
+        } else {
+            return this.collection.updateOne({
+                _id: new ObjectID(user._id)
+            }, {
+                $set: {
+                    shops: [shop]
+                }
+            });
+        }
+    }
 
     checkIfEmailAlreadyExists(email) {
         const props = {
