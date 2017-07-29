@@ -20,7 +20,7 @@ block content
                             each product in products
                                 tr.productsInformation
                                     td.shopper.col-sm-1.col-md-1(style='text-align: center')
-                                        strong(data-id=product.shopperId)= product.shopper
+                                        strong(data-id=product.shopperId, data-userId=product.userId, data-tripId=product.tripId)= product.shopper
                                     td.productInBasket.col-sm-8.col-md-6('data-key'=product.key)
                                         h3.product.media-heading=product.name
                                     td.col-sm-1.col-md-1(style='text-align: center')
@@ -66,4 +66,3 @@ block content
 block additionalBottomScripts
     script(src="/libs/jquery/dist/jquery.js")
     script(src="/public/js/actionsWithBasket.js")
-    script(src="/public/js/checkOutBasket.js")
