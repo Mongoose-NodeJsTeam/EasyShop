@@ -8,17 +8,24 @@ block content
         p #{user.isProUser}
     if user.tripshops
         each trip in user.tripshops
-            h4=trip.date
+            if user.BuyersBaskets.length>0
+                div Your Commands To buy, shoppera koito trqbva da kupi
+                    h4=trip.date
+                    each item in user.BuyersBaskets
+                        each product in item.basket
+
+                            if product.tripId == trip._id
+                                h5= product.product
+                                    | --->
+                                    span=product.quantity
+            else
+                h5 No commands fot the trip
     if user.baskets
-        div Your Commands
-            each basket in user.baskets
-                each product in basket
-                    h5= product.product
+        div Your Commands, tova koeto toi porachva
+            each item in user.baskets
+                h3 Basket
+                    each product in item
+                        h5= product.product
+                        | --->
+                        span=product.quantity
 
-
-
-    if user.BuyersBaskets
-        div Your Commands To buy
-            each item in user.BuyersBaskets
-                each product in item.basket
-                    h5= product.product
