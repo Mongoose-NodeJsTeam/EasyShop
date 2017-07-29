@@ -8,36 +8,24 @@ class TripshopData extends BaseData {
     }
 
     create(modelData, shop, user) {
-       const modelUpdateData={
-           date: modelData.date,
-           shop: shop,
-           user: user
-       };
+        const modelUpdateData={
+            date: modelData.date,
+            shop: {
+                name:shop.name,
+                shopId:shop._id,
+                products:shop.products
+            },
+            user: {
+                username:user.username,
+                userId:user._id,
+                address:user.address
+            }
+        };
 
         return this.collection.insertOne(modelUpdateData)
             .then(() => {
                 return this.ModelClass.toViewModel(modelUpdateData);
             });
-    }
-    addBasketToTripshop(tripshop, basket) {
-        if (tripshop.baskets) {
-            return this.collection.updateOne({
-                _id: tripshop._id
-            }, {
-                $push: {
-                    baskets: basket
-                }
-            });
-        } else {
-            return this.collection.updateOne({
-                _id: tripshop._id
-            }, {
-                $set: {
-                    baskets: [basket]
-                }
-            });
-        }
-
     }
 }
 
