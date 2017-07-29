@@ -4,6 +4,14 @@ class ShopController {
     }
 
     getAddShopForm(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         return res.render('shop/addNewShop');
     }
 
