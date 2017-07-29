@@ -18,56 +18,32 @@ class ShopController {
     createShop(req, res) {
         const shop = req.body;
         const user = req.user;
+        shop.user = {
+            id: user._id,
+            username: user.username,
+            isProUser: user.isProUser
+        };
 
-        this.data.shops.findByShopName(shop.name)
-            .then((foundShop) => {
-                if (foundShop) {
-                    return res.redirect('/shop/add-shop');
-                } else {
-                    shop.user = {
-                        id: user._id,
-                        username: user.username,
-                        isProUser: user.isProUser
-                    };
 
-                    return Promise.all(
-                        [
-                            this.data.shops.create(shop),
-                            this.data.users.findByUsername(user.username),
-                        ]
-                    ).then(([dbShop, dbUser]) => {
-                        dbUser.username = user.username;
-                        dbUser.password = user.password;
-                        dbUser.address = user.address;
-                        dbUser.isProUser = user.isProUser;
-                        dbUser.email = user.email;
-                        dbUser.tripshops = user.tripShops || [];
-
-                        dbUser.shops = user.shops || [];
-                        dbUser.shops.push({
-                            name: dbShop.name,
-                            user: dbShop.username,
-                            address: dbShop.address,
-                            mobile: dbShop.mobile,
-                            email: dbShop.email,
-                            description: dbShop.description,
-                            products: dbShop.products || []
-                        });
-
-                        return this.data.users.updateById(dbUser);
-                    })
-                        .then(() => {
-                            req.flash(
-                                'success',
-                                'New shop added successfully!!');
-                            return res.redirect('/shop/my-shops');
-                        })
-                        .catch((err) => {
-                            console.log('shiiiiiiit');
-                            req.flash('error', err);
-                            return res.redirect('/shop/add-shop');
-                        });
-                }
+        return Promise.all(
+            [
+                this.data.shops.create(shop),
+                this.data.users.filterBy({_id: user._id}),
+            ]
+        ).then(([dbShop, dbUsers]) => {
+            const dbUser = dbUsers[0];
+            this.data.users.addShopToUser(dbUser, shop);
+        })
+            .then(() => {
+                req.flash(
+                    'success',
+                    'New shop added successfully!!');
+                return res.redirect('/shop/my-shops');
+            })
+            .catch((err) => {
+                console.log('shiiiiiiit');
+                req.flash('error', err);
+                return res.redirect('/shop/add-shop');
             });
     }
 
