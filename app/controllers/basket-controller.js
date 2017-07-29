@@ -24,14 +24,11 @@ class BasketController {
 
 
                 if (item.userId == userId) {
-                    console.log(item);
                     arr.push((item));
                     tripId = item.tripId;
                     date = item.tripDate;
                     shopperId = item.userId;
-
                 }
-
             }
         }
 
@@ -57,17 +54,17 @@ class BasketController {
             if (products.hasOwnProperty(key)) {
                 const item = JSON.parse(products[key]);
                 if (item.userId == userId) {
-                    basket.push((item));
+                    console.log(item);
+
 //proverka dali itemite sa ot picha kadeto gi e porachal server chasta,item.userId ne e implementirano za momenta
 //tripId=item.tripId
                 }
-                console.log(basket);
+                basket.push((item));
 
                 shopperId = item.shopperId;
 
 
                 tripID = item.tripId;
-
             }
         }
 
@@ -80,21 +77,20 @@ class BasketController {
         };
         return Promise.all(
             [
-                this.data.users.filterBy({_id: userId}),
-                this.data.tripshops.filterBy({id: tripID}),
-                this.data.users.filterBy({_id: new ObjectID(shopperId)})
+                this.data.users.filterBy({ _id: new ObjectID(userId) }),
+
+                this.data.users.filterBy({ _id: new ObjectID(shopperId) })
 
             ]
-        ).then(([user, tripshop, shopper]) => {
+        ).then(([user, shopper]) => {
             return Promise.all([
                 this.data.users.addBasketToUser(user[0], basket),
-                this.data.tripshops.addBasketToTripshop(tripshop[0], basketTripshops),
+
                 this.data.users.addBuyersBasketToUser(shopper[0], basketTripshops)
 
-            ])
+            ]);
         }).then(() =>
-            res.redirect('/profile'))
-
+            res.redirect('/profile'));
     }
 }
 
@@ -102,4 +98,4 @@ const init = (data) => {
     return new BasketController(data);
 };
 
-module.exports = {init};
+module.exports = { init };
