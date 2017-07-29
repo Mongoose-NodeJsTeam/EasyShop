@@ -27,12 +27,12 @@ class MapController {
     loadAuthMapData(req, res) {
         Promise.all([
             this.data.shops.getAll(),
-            this.data.tripshops.getAll()
+            this.data.users.findAllUsersWithTripShops()
         ])
-            .then(([shops, tripshops]) => {
+            .then(([shops, users]) => {
                 res.send({
                     shops: shops,
-                    tripshops: tripshops
+                    users: users
                 });
             });
     }

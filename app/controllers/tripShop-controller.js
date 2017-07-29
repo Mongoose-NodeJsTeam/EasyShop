@@ -16,7 +16,6 @@ class TripshopController {
 
         return this.data.tripshops. findById(tripId)
             .then((tripshop)=>{
-                console.log(tripshop);
                 res.render('tripshop/shopperProducts',{
                     userId:user._id,
                     shop:tripshop.shop,

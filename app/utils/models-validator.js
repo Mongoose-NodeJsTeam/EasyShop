@@ -56,7 +56,7 @@ class ModelsValidator {
             return false;
         }
 
-        if (+value <= 0 || +value >= 1000) {
+        if (+value <= 0 || +value > 1000) {
             return false;
         }
 

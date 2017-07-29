@@ -1,5 +1,5 @@
 module.exports = {
-    appPort: 3001,
-    connectionString: 'mongodb://mongoose:mongoose@ds141232.mlab.com:41232/usersprofiles',
+    appPort: 3002,
+    connectionString: 'mongodb://mongo:mongo@ds127983.mlab.com:27983/easypeasyshop',
     sessionSecret: 'Purple Unicorn'
 };

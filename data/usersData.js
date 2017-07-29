@@ -30,7 +30,9 @@ class UsersData extends BaseData {
     }
 
     checkIfEmailAlreadyExists(email) {
-        const props = { email: email };
+        const props = {
+            email: email
+        };
 
         return this.collection.findOne(props)
             .then((user) => {
@@ -40,6 +42,16 @@ class UsersData extends BaseData {
 
                 return true;
             });
+    }
+
+    findAllUsersWithTripShops() {
+        const props = {
+            tripshops: {
+                $exists: true
+            }
+        };
+
+        return this.collection.find(props).toArray();
     }
 
     assignTripshoptoUser(user, tripshop) {
@@ -80,6 +92,7 @@ class UsersData extends BaseData {
             });
         }
     }
+
     addBasketToUser(user, basket) {
         if (user.baskets) {
             return this.collection.updateOne({
