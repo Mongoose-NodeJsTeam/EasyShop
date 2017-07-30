@@ -5,10 +5,11 @@ block app-title
 
 block content
     != messages('flashMessages/flashMessages', locals)
-    .row
+    .row.align-middle
         .col-12
-            h1#homePage-header
-                | Something as a slogan and background image
+            h1.text-center.center-block
+                | Easy peasy, click and shop!
+            h1.text-center
+                | The modern platform for shared shopping!
             a#discover-btn.btn.btn-success.btn-lg(href='/map')
                 | Explore
-
