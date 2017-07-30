@@ -66,7 +66,6 @@ class AuthController {
             });
     }
 
-
     signOut(req, res) {
         req.logout();
         req.flash('success', 'Logout successful!');

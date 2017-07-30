@@ -6,6 +6,14 @@ class BasketController {
     }
 
     loadBasketPage(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const userId = req.user._id;
         const user = req.user;
 
@@ -14,14 +22,11 @@ class BasketController {
             date,
             shopperId;
 
-
         const arr = [];
-
 
         for (const key in products) {
             if (products.hasOwnProperty(key)) {
                 const item = JSON.parse(products[key]);
-
 
                 if (item.userId == userId) {
                     arr.push((item));
@@ -32,8 +37,7 @@ class BasketController {
             }
         }
 
-
-        res.render('basket', {
+        return res.render('basket', {
             products: arr,
             user: user,
             tripId: tripId,
@@ -43,6 +47,14 @@ class BasketController {
 
 
     basketCheckOut(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const products = (req.body);
         const basket = [];
         let tripID;
