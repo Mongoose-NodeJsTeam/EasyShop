@@ -44,13 +44,25 @@ block content
             a.btn.btn-lg.btn-primary(href='/shop/' + shop._id + '/add-product') Add product
     else
         h2.text-center= shop.name
-        .row.text-center
-            each product in shop.products
-                include ../partials/shop/_shopProductsTempl
-                    .text-center
-                        input.quantitySetter.form-control(type='number', value = 0, name='quantity')
-                        a.addProductButton.addToBasket.btn.btn-lg.btn-primary(data-id=product._id, data-shop=shop._id, data-name=product.name, data-price=product.price,
-                        data-weight=product.weight, data-quantity=value) Add product
+        if(shop.products)
+            .row.text-center
+                each product in shop.products
+                    include ../partials/shop/_shopProductsTempl
+                        .text-center
+                            input.quantitySetter.form-control(type='number', value = 0, name='quantity')
+                            a.addProductButton.addToBasket.btn.btn-lg.btn-primary(data-id=product._id, data-shop=shop._id, data-name=product.name, data-price=product.price,
+                            data-weight=product.weight, data-quantity=value) Add product
+        else
+            .row.text-center
+                h4.text-center
+                    | There are no products in this shop at the moment.
+
+
+
+
+
+
+
 
 block additionalBottomScripts
     script(src="/libs/bootstrap/js/modal.js")
