@@ -3,9 +3,8 @@ extends ../shared/_layout
 block content
     section#contact
         .section-content.text-center
+            != messages('flashMessages/flashMessages', locals)
             h1.section-header
-
-
                 | #{user.username} go create a tripshop
         .contact-section
             .container
@@ -25,5 +24,4 @@ block content
                         div
                             input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Add')
 block additionalBottomScripts
-    script(src="/libs/jquery/dist/jquery.js")
     script(src="/libs/bootstrap/js/modal.js")

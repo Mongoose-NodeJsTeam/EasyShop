@@ -1,9 +1,14 @@
+const ModelsValidator = require('../app/utils/models-validator');
+
 class Tripshop {
-    constructor(user, date, shop) {
-        this.user = user;
-        this.shop = shop;
-        this.date = date;
+    static validator(model) {
+        if (ModelsValidator._validateDatetimeTrip(model)) {
+            return true;
+        }
+
+        return false;
     }
+
 
     get id() {
         return this._id;

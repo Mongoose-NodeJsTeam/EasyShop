@@ -72,6 +72,24 @@ class ModelsValidator {
 
         return true;
     }
+
+    static _validateDatetimeTrip(value) {
+        const today = new Date();
+        const dateToBeChecked = new Date(value);
+
+        const nextWeek = Date.parse(
+            new Date(today.getFullYear(),
+                today.getMonth(),
+                today.getDate() + 7));
+
+        today.setHours(0, 0, 0, 0);
+
+        if (dateToBeChecked >= today && dateToBeChecked <= nextWeek) {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 module.exports = ModelsValidator;

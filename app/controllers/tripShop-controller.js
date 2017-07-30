@@ -16,7 +16,6 @@ class TripshopController {
 
         return this.data.tripshops. findById(tripId)
             .then((tripshop)=>{
-                console.log(tripshop);
                 res.render('tripshop/shopperProducts', {
                     userId: user._id,
                     shop: tripshop.shop,
@@ -70,8 +69,12 @@ class TripshopController {
                                 user,
                                 tripshop)])
                             .then(() => {
-                                res.redirect('/tripshops');
+                                res.redirect('/tripshops/');
                             });
+                    })
+                    .catch((err) => {
+                        req.flash('error', err);
+                        return res.redirect('/tripshops/add-tripshop');
                     });
             });
     }
@@ -81,4 +84,4 @@ const init = (data) => {
     return new TripshopController(data);
 };
 
-module.exports = {init};
+module.exports = { init };

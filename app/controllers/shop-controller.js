@@ -51,7 +51,6 @@ class ShopController {
                 return res.redirect('/shop/my-shops');
             })
             .catch((err) => {
-                console.log('shiiiiiiit');
                 req.flash('error', err);
                 return res.redirect('/shop/add-shop');
             });
