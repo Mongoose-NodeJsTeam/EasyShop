@@ -4,9 +4,17 @@ class ProductController {
     }
 
     loadProductForm(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const shopId = req.params.id;
 
-        this.data.shops.findById(shopId)
+        return this.data.shops.findById(shopId)
             .then((shop) => {
                 res.status(200)
                     .render('product/addNewProduct', {
@@ -16,6 +24,14 @@ class ProductController {
     }
 
     createProduct(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const shopId = req.params.id;
         const productData = req.body;
         productData.shopId = shopId;
@@ -37,7 +53,7 @@ class ProductController {
     loadProductInfo(req, res) {
         const productId = req.params.productId;
 
-        this.data.products.findById(productId)
+        return this.data.products.findById(productId)
             .then((product) => {
                 return res.send({
                     product: product
@@ -46,6 +62,14 @@ class ProductController {
     }
 
     updateProduct(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const productEditData = req.body;
         const productId = req.params.productId;
         const shopId = req.params.id;
@@ -62,15 +86,27 @@ class ProductController {
                     'success',
                     'Product successfully updated!');
 
-                return res.send({ locationUrl: '/shop/' + shopId });
+                return res.send({
+                    locationUrl: '/shop/' + shopId
+                });
             })
             .catch((err) => {
                 req.flash('error', err);
-                return res.send({ locationUrl: '/shop/' + shopId });
+                return res.send({
+                    locationUrl: '/shop/' + shopId
+                });
             });
     }
 
     deleteProduct(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const productId = req.params.productId;
         const shopId = req.params.id;
 
@@ -83,11 +119,15 @@ class ProductController {
                     'success',
                     'Product successfully deleted!');
 
-                return res.send({ locationUrl: '/shop/' + shopId });
+                return res.send({
+                    locationUrl: '/shop/' + shopId
+                });
             })
             .catch((err) => {
                 req.flash('error', err);
-                return res.send({ locationUrl: '/shop/' + shopId });
+                return res.send({
+                    locationUrl: '/shop/' + shopId
+                });
             });
     }
 }
