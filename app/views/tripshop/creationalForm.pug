@@ -1,27 +1,32 @@
 extends ../shared/_layout
 
 block content
-    section#contact
-        .section-content.text-center
-            != messages('flashMessages/flashMessages', locals)
-            h1.section-header
-                | #{user.username} go create a tripshop
-        .contact-section
-            .container
-                form(action='/tripshops/add-tripshop', method='post')
-                    .col-md-6.form-line
-                        .form-group
-                            span Select Shop
-                            select(name='shop')
-                                each shop in shops
-                                    option(value=shop._id)=shop.name
+    if shops.length > 0
+        section#contact
+            .section-content.text-center
+                != messages('flashMessages/flashMessages', locals)
+                h1.section-header
+                    | #{user.username} go create a tripshop
+            .contact-section
+                .container
+                    form(action='/tripshops/add-tripshop', method='post')
+                        .col-md-6.form-line
+                            .form-group
+                                span Select Shop
+                                select(name='shop')
+                                    each shop in shops
+                                        option(value=shop._id)=shop.name
+                            .form-group
+                                label(for='date') Date
+                                input.form-control(type='date', id='date', name='date')
+                            div
+                                input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Add')
+    else
+        .text-center
+            h3 There are no registered shops in the system. Please come back later!
 
-                        .form-group
-                            label(for='date') Date
-                            input.form-control(type='date', id='date', name='date')
 
 
-                        div
-                            input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Add')
+
 block additionalBottomScripts
     script(src="/libs/bootstrap/js/modal.js")
