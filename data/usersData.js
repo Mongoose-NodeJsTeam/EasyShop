@@ -1,6 +1,7 @@
 const BaseData = require('./baseData');
 const User = require('../models/userModel');
 const ObjectID = require('mongodb').ObjectID;
+const passHasher = require('../app/utils/passHasher');
 
 class UsersData extends BaseData {
     constructor(db) {
@@ -21,7 +22,8 @@ class UsersData extends BaseData {
                     return Promise.reject('Invalid user');
                 }
 
-                if (user.password !== password) {
+                const hashedPass = passHasher.passHashing(password);
+                if (user.password !== hashedPass) {
                     return Promise.reject('Invalid password');
                 }
 

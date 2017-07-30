@@ -26,6 +26,7 @@ class BaseData {
         if (!this._isModelValid(model)) {
             return Promise.reject('Model validation failed!');
         }
+
         return this.collection.insertOne(model)
             .then(() => {
                 return this.ModelClass.toViewModel(model);
