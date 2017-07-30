@@ -36,7 +36,9 @@ class ShopController {
         return Promise.all(
             [
                 this.data.shops.create(shop),
-                this.data.users.filterBy({_id: user._id}),
+                this.data.users.filterBy({
+                    _id: user._id
+                }),
             ]
         ).then(([dbShop, dbUsers]) => {
             const dbUser = dbUsers[0];

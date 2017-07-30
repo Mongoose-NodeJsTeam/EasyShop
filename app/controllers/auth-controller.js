@@ -6,10 +6,22 @@ class AuthController {
     }
 
     getSignUpForm(req, res) {
+        if (req.isAuthenticated()) {
+            return res.render('homePage', {
+                user: req.user
+            });
+        }
+
         return res.render('auth/sign-up-form');
     }
 
     getSignInForm(req, res) {
+        if (req.isAuthenticated()) {
+            return res.render('homePage', {
+                user: req.user
+            });
+        }
+
         return res.render('auth/sign-in-form');
     }
 
