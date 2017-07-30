@@ -2,7 +2,6 @@ extends ../shared/_layout
 
 
 block content
-
         if trips.length
                 each trip in trips
                     .col-md-4.thumbnail
@@ -25,7 +24,7 @@ block content
         else
             .container
                 h3 Sorry there are no trips at the moment
-                h4 do you want to create one?
+                h4 Do you want to create one?
                 a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop
 
 

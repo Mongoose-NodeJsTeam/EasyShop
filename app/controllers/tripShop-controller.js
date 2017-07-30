@@ -69,6 +69,7 @@ class TripshopController {
                                 user,
                                 tripshop)])
                             .then(() => {
+                                req.flash('success', 'New tripshop created!');
                                 res.redirect('/tripshops/');
                             });
                     })

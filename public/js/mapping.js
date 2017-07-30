@@ -67,7 +67,6 @@
         }
     }
 
-
     function geocodding(obj, geocoder, map, bounds) {
         geocoder.geocode({
             'address': obj.address

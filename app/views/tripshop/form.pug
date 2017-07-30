@@ -1,8 +1,10 @@
 extends ../shared/_layout
 
 block content
+    != messages('flashMessages/flashMessages', locals)
     if user.tripshops
-        a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add trip
+        .text-center
+            a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add trip
         .row
             each trip in user.tripshops
                 .col-md-4.thumbnail
