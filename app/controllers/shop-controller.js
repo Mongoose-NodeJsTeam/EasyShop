@@ -16,6 +16,14 @@ class ShopController {
     }
 
     createShop(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const shop = req.body;
         const user = req.user;
         shop.user = {
@@ -48,9 +56,17 @@ class ShopController {
     }
 
     loadMyShopsPage(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const userId = req.user._id;
 
-        this.data.shops.findAllUserShopsByUserId(userId)
+        return this.data.shops.findAllUserShopsByUserId(userId)
             .then((shops) => {
                 res.render('shop/myShopsPage', {
                     user: req.user,
@@ -60,9 +76,13 @@ class ShopController {
     }
 
     loadSpecifiedShop(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
         const shopId = req.params.id;
 
-        this.data.shops.findById(shopId)
+        return this.data.shops.findById(shopId)
             .then((shop) => {
                 return res.render('shop/shopDetails', {
                     user: req.user,
@@ -72,9 +92,13 @@ class ShopController {
     }
 
     loadGeneralInfoAboutShop(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
         const shopId = req.params.id;
 
-        this.data.shops.findById(shopId)
+        return this.data.shops.findById(shopId)
             .then((shop) => {
                 return res.send({
                     shop: shop
@@ -85,6 +109,14 @@ class ShopController {
     updateSpecifiedShop(req, res) {
         const shopEditData = req.body;
         const shopId = req.params.id;
+
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
 
         return this.data.shops.updateShopById(shopId, shopEditData)
             .then(() => {
@@ -100,9 +132,17 @@ class ShopController {
     }
 
     deleteShop(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (!req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const shopId = req.params.id;
 
-        this.data.shops.deleteById(shopId)
+        return this.data.shops.deleteById(shopId)
             .then(() => {
                 req.flash(
                     'success',

@@ -1,6 +1,5 @@
 const express = require('express');
 
-
 const attachTo = (app, data) => {
     const mapController = require('../controllers/map-controller').init(data);
 
