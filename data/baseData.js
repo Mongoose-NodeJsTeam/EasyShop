@@ -28,8 +28,10 @@ class BaseData {
             return Promise.reject('Model validation failed!');
         }
 
-        const hashedPass = passHasher.passHashing(model.password);
-        model.password = hashedPass;
+        if (model.password) {
+            const hashedPass = passHasher.passHashing(model.password);
+            model.password = hashedPass;
+        }
 
         return this.collection.insertOne(model)
             .then(() => {

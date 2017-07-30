@@ -5,7 +5,7 @@
         method: 'GET',
         url: '/map/loadAuthMapData',
         success: (data) => {
-            if (data.shops.length && data.users.length) {
+            if (data.shops.length || data.users.length) {
                 console.log(data);
                 initMap(data);
             } else {
@@ -32,7 +32,7 @@
         var geocoder = new google.maps.Geocoder();
         let bounds = new google.maps.LatLngBounds();
 
-        for (var prop in data) {
+        for (let prop in data) {
             let arrayOfObjs = data[prop];
 
             if(arrayOfObjs.length > 0) {
@@ -73,8 +73,8 @@
             'address': obj.address
         }, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
-                for (var j = 0; j < results.length; j++) {
-                    var marker = new google.maps.Marker({
+                for (let j = 0; j < results.length; j++) {
+                    const marker = new google.maps.Marker({
                         position: results[j].geometry.location,
                         map: map,
                         title: obj.title,
@@ -142,14 +142,14 @@
 
                 bounds.extend(results[0].geometry.location);
                 // map.fitBounds(bounds);
+            } else {
+                alert('Geocode of ' + obj.address + ' failed,' + status);
             }
-
-            alert('Geocode of ' + obj.address + ' failed,' + status);
         });
     }
 
     function createNoContentMsg() {
-        const mapObjToAppendMessage = $('#map').append(
+        $('#map').append(
             '<h3 class="text-center">Still no content to show! ' +
             'We are at the beginning! Return back soon!</h3>');
     }
