@@ -33,14 +33,13 @@ class ShopData extends BaseData {
                     });
                 }
 
-                return this.collection.updateOne(
-                    {_id: shop._id},
-                    {
+                return this.collection.updateOne({
+                        _id: shop._id
+                    }, {
                         $set: {
                             products: [product]
                         }
                     });
-
             });
     }
 

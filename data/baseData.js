@@ -1,4 +1,5 @@
 const ObjectID = require('mongodb').ObjectID;
+const passHasher = require('../app/utils/passHasher');
 
 class BaseData {
     constructor(db, ModelClass) {
@@ -26,6 +27,9 @@ class BaseData {
         if (!this._isModelValid(model)) {
             return Promise.reject('Model validation failed!');
         }
+
+        const hashedPass = passHasher.passHashing(model.password);
+        model.password = hashedPass;
 
         return this.collection.insertOne(model)
             .then(() => {
