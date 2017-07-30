@@ -1,16 +1,21 @@
-/* globals $ */
+/* globals $ google*/
 
 (() => {
     $.ajax({
         method: 'GET',
         url: '/map/loadAuthMapData',
         success: (data) => {
-            initMap(data);
+            if (data.shops.length && data.users.length) {
+                console.log(data);
+                initMap(data);
+            } else {
+                createNoContentMsg();
+            }
         }
     });
 
     function initMap(data) {
-        var myOptions = {
+        const myOptions = {
             zoom: 12,
             panControl: false,
             zoomControl: false,
@@ -23,7 +28,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP,
         };
 
-        var map = new google.maps.Map(document.getElementById("map"), myOptions);
+        var map = new google.maps.Map(document.getElementById('map'), myOptions);
         var geocoder = new google.maps.Geocoder();
         let bounds = new google.maps.LatLngBounds();
 
@@ -59,7 +64,6 @@
                     geocodding(obj, geocoder, map, bounds);
                 }
             }
-
         }
     }
 
@@ -67,7 +71,7 @@
     function geocodding(obj, geocoder, map, bounds) {
         geocoder.geocode({
             'address': obj.address
-        }, function (results, status) {
+        }, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
                 for (var j = 0; j < results.length; j++) {
                     var marker = new google.maps.Marker({
@@ -78,7 +82,7 @@
                     });
 
                     let content;
-                    if(obj.property === 'shops') {
+                    if (obj.property === 'shops') {
                         content =
                             '<h4>' +
                                 marker.title +
@@ -90,7 +94,11 @@
                     } else {
                         str = [];
 
-                        let header = '<h3>' + marker.title + ' goes to:' + '</h3>';
+                        let header =
+                            '<h3>' +
+                                marker.title +
+                                ' goes to:' +
+                            '</h3>';
                         str.push(header);
 
                         for (var i = 0; i < obj.tripshops.length; i++) {
@@ -101,22 +109,32 @@
 
                             str.push(body);
 
-                            let url ='<a href=' + obj.initialUrl + obj.tripshops[i]._id + '>' + obj.urlText + obj.tripshops[i].shop.name + '</a>';
+                            let url =
+                                '<a href=' +
+                                obj.initialUrl +
+                                obj.tripshops[i]._id +
+                                '>' +
+                                obj.urlText +
+                                obj.tripshops[i].shop.name +
+                                '</a>';
                             str.push(url);
                         }
 
                         content = str.join('');
                     }
 
-
-
-                    google.maps.event.addListener(marker, 'click', getInfoCallback(map, content));
-
+                    google.maps.event.addListener(
+                        marker,
+                        'click',
+                        getInfoCallback(map, content));
                 }
 
                 function getInfoCallback(map, content) {
-                    let infowindow = new google.maps.InfoWindow({content: content});
-                    return function () {
+                    let infowindow = new google.maps.InfoWindow({
+                        content: content
+                    });
+
+                    return function() {
                         infowindow.setContent(content);
                         infowindow.open(map, this);
                     };
@@ -124,9 +142,15 @@
 
                 bounds.extend(results[0].geometry.location);
                 // map.fitBounds(bounds);
-            } else {
-                alert("Geocode of " + address + " failed," + status);
             }
+
+            alert('Geocode of ' + obj.address + ' failed,' + status);
         });
+    }
+
+    function createNoContentMsg() {
+        const mapObjToAppendMessage = $('#map').append(
+            '<h3 class="text-center">Still no content to show! ' +
+            'We are at the beginning! Return back soon!</h3>');
     }
 })();
