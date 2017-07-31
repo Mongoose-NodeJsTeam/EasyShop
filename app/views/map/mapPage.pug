@@ -4,13 +4,20 @@ block app-title
     title EasyShop: Map
 
 block content
-    .text-center
-        h2 On the map you can find all registered shops and all available tripshops.
-        h2.text-danger Red pins will reveal shops info
-        span
-        h2.text-success Green pins will reveal tripshops info
-    .row
-        #map
+    .container
+        .row
+            .col-6
+                h2#leftRedPins Red pins for shops
+            .col-6
+                h2#rightGreenPins Green pins for tripshops
+        .row
+            #map
+
+
+
+
+
+
 
 
 block additionalBottomScripts

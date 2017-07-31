@@ -23,7 +23,18 @@ body {
 #map {
     position: relative;
     margin: 0 auto;
-    width: 1200px;
+    width: 1170px;
     height: 800px;
 }
 
+
+#leftRedPins {
+    color: indianred;
+    width: 300px;
+    float:left; /* add this */
+}
+
+#rightGreenPins {
+    color: limegreen;
+    float: right; /* add this */
+}
