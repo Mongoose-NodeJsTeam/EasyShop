@@ -5,9 +5,14 @@ block app-title
 
 block content
     .container
-        .row
-            .col-md-12.text-center
-                .container
-                    h1 401
-                    h2.text-center
-                        |  Unauthorized User
+        .jumbotron
+            .text-center
+                i.fa.fa-5x.fa-frown-o(style='color:#d9534f;')
+            h2.text-center
+                | Access denied!
+                p
+                p You are not authorized
+            p.text-center
+                a.btn.btn-primary(href='/')
+                    i.fa.fa-home
+                    |  Take Me Home
