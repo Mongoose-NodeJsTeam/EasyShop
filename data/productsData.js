@@ -19,6 +19,12 @@ class ProductData extends BaseData {
             }
         );
     }
+
+    deleteProductByShopId(shopId) {
+        return this.collection.remove({
+            shopId: shopId
+        });
+    }
 }
 
 module.exports = ProductData;

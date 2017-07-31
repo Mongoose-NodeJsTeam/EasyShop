@@ -141,9 +141,15 @@ class ShopController {
             return res.render('unauthorized');
         }
 
+        const userId = req.user._id;
         const shopId = req.params.id;
 
-        return this.data.shops.deleteById(shopId)
+        return Promise.all([
+            this.data.shops.deleteById(shopId),
+            this.data.products.deleteProductByShopId(shopId),
+            this.data.users.deleteShopFromUser(userId, shopId)
+
+        ])
             .then(() => {
                 req.flash(
                     'success',

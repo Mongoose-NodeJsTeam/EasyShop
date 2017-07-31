@@ -133,6 +133,18 @@ class UsersData extends BaseData {
             });
         }
     }
+
+    deleteShopFromUser(userId, shopId) {
+        return this.collection.updateOne({
+            _id: userId
+        }, {
+            $pull: {
+                'shops': {
+                    _id: new ObjectID(shopId)
+                }
+            }
+        });
+    }
 }
 
 module.exports = UsersData;
