@@ -45,7 +45,6 @@ class BasketController {
         });
     }
 
-
     basketCheckOut(req, res) {
         if (!req.isAuthenticated()) {
             return res.redirect('/auth/sign-in');
@@ -57,10 +56,10 @@ class BasketController {
 
         const products = (req.body);
         const basket = [];
-        let tripID;
+        let tripId;
         let shopperId;
+        let buyerID;
         const userId = req.user._id;
-
 
         for (const key in products) {
             if (products.hasOwnProperty(key)) {
@@ -74,9 +73,8 @@ class BasketController {
                 basket.push((item));
 
                 shopperId = item.shopperId;
-
-
-                tripID = item.tripId;
+                tripId = item.tripId;
+                buyerID=item.userId;
             }
         }
 
@@ -85,21 +83,35 @@ class BasketController {
             buyer: {
                 username: req.user.username,
                 buyersId: req.user._id
-            }
+            },
+            tripId: tripId
+
         };
+        const basketToUser = {
+            basket: basket,
+            bayerId: buyerID,
+            tripId: tripId
+        };
+
         return Promise.all(
             [
-                this.data.users.filterBy({ _id: new ObjectID(userId) }),
+                this.data.users.filterBy({
+                    _id: new ObjectID(userId)
+                }),
 
-                this.data.users.filterBy({ _id: new ObjectID(shopperId) })
-
+                this.data.users.filterBy({
+                    _id: new ObjectID(shopperId)
+                })
             ]
         ).then(([user, shopper]) => {
             return Promise.all([
-                this.data.users.addBasketToUser(user[0], basket),
+                this.data.users.addBasketToUser(
+                    user[0],
+                    basketToUser),
 
-                this.data.users.addBuyersBasketToUser(shopper[0], basketTripshops)
-
+                this.data.users.addBuyersBasketToUser(
+                    shopper[0],
+                    basketTripshops)
             ]);
         }).then(() =>
             res.redirect('/profile'));

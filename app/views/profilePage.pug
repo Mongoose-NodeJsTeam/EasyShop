@@ -6,25 +6,24 @@ block content
         p #{user.address}
         p #{user.email}
         p #{user.isProUser}
-    if user.tripshops
+    if user.tripshops && user.tripshops.length > 0
         each trip in user.tripshops
-            if user.BuyersBaskets
+            if user.BuyersBaskets && user.BuyersBaskets.length > 0
                 div Your Commands To buy
                     h4=trip.date
                     each item in user.BuyersBaskets
                         each product in item.basket
-
                             if product.tripId == trip._id
                                 h5= product.product
                                     | --->
                                     span=product.quantity
             else
                 h5 No commands fot the trip
-    if user.baskets
+    if user.baskets && user.baskets.length > 0
         div Your Commands
             each item in user.baskets
                 h3 Basket
-                    each product in item
+                    each product in item.basket
                         h5= product.product
                         | --->
                         span=product.quantity
