@@ -130,10 +130,7 @@ class TripshopController {
             this.data.users.deleteTripshopFromUser(userId, tripId),
             this.data.users.deleteBasketFromDeletedTripShop(userId, tripId),
             this.data.users.deleteBasketFromBuyerUser(tripId)
-        ]).then(([a, b, c, d]) => {
-            console.log(d);
-            console.log(tripId);
-        })
+        ])
             .then(() => {
                 req.flash('success', 'Tripshop deleted!');
                 res.redirect('/tripshops/');
