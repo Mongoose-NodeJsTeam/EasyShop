@@ -30,6 +30,7 @@ class UsersData extends BaseData {
                 return true;
             });
     }
+
     addShopToUser(user, shop) {
         if (user.shops) {
             return this.collection.updateOne({
@@ -39,15 +40,14 @@ class UsersData extends BaseData {
                     shops: shop
                 }
             });
-        } else {
-            return this.collection.updateOne({
-                _id: new ObjectID(user._id)
-            }, {
-                $set: {
-                    shops: [shop]
-                }
-            });
         }
+        return this.collection.updateOne({
+            _id: new ObjectID(user._id)
+        }, {
+            $set: {
+                shops: [shop]
+            }
+        });
     }
 
     checkIfEmailAlreadyExists(email) {
@@ -84,16 +84,16 @@ class UsersData extends BaseData {
                     tripshops: tripshop
                 }
             });
-        } else {
-            return this.collection.updateOne({
-                _id: new ObjectID(user._id)
-            }, {
-                $set: {
-                    tripshops: [tripshop]
-                }
-            });
         }
+        return this.collection.updateOne({
+            _id: new ObjectID(user._id)
+        }, {
+            $set: {
+                tripshops: [tripshop]
+            }
+        });
     }
+
     addBuyersBasketToUser(user, basket) {
         if (user.BuyersBaskets) {
             return this.collection.updateOne({
@@ -103,15 +103,14 @@ class UsersData extends BaseData {
                     BuyersBaskets: basket
                 }
             });
-        } else {
-            return this.collection.updateOne({
-                _id: new ObjectID(user._id)
-            }, {
-                $set: {
-                    BuyersBaskets: [basket]
-                }
-            });
         }
+        return this.collection.updateOne({
+            _id: new ObjectID(user._id)
+        }, {
+            $set: {
+                BuyersBaskets: [basket]
+            }
+        });
     }
 
     addBasketToUser(user, basket) {
@@ -123,15 +122,14 @@ class UsersData extends BaseData {
                     baskets: basket
                 }
             });
-        } else {
-            return this.collection.updateOne({
-                _id: new ObjectID(user._id)
-            }, {
-                $set: {
-                    baskets: [basket]
-                }
-            });
         }
+        return this.collection.updateOne({
+            _id: new ObjectID(user._id)
+        }, {
+            $set: {
+                baskets: [basket]
+            }
+        });
     }
 
     deleteShopFromUser(userId, shopId) {
@@ -171,8 +169,7 @@ class UsersData extends BaseData {
     }
 
     deleteBasketFromBuyerUser(tripId) {
-        return this.collection.updateMany({
-        }, {
+        return this.collection.updateMany({}, {
             $pull: {
                 'baskets': {
                     tripId: tripId
