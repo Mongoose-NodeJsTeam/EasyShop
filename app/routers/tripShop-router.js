@@ -11,13 +11,15 @@ const attachTo = (app, data) => {
             .bind(tripshopController))
         .get('/findTripshop', tripshopController.loadAllTripshops
             .bind(tripshopController))
-
         .post('/add-tripshop', tripshopController.createTripshop
             .bind(tripshopController))
         .get('/add-tripshop', tripshopController.loadTripshopCreationalForm
             .bind(tripshopController))
         .get('/:id', tripshopController.loadProducts
+            .bind(tripshopController))
+        .get('/:id/delete-tripshop', tripshopController.deleteTripShop
             .bind(tripshopController));
+
 
     app.use('/tripshops', tripshopRouter);
 };

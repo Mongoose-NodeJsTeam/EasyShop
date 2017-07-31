@@ -145,6 +145,41 @@ class UsersData extends BaseData {
             }
         });
     }
+
+    deleteTripshopFromUser(userId, tripId) {
+        return this.collection.updateOne({
+            _id: new ObjectID(userId)
+        }, {
+            $pull: {
+                'tripshops': {
+                    _id: new ObjectID(tripId)
+                }
+            }
+        });
+    }
+
+    deleteBasketFromDeletedTripShop(userId, tripId) {
+        return this.collection.updateOne({
+            _id: new ObjectID(userId)
+        }, {
+            $pull: {
+                'BuyersBaskets': {
+                    tripId: tripId
+                }
+            }
+        });
+    }
+
+    deleteBasketFromBuyerUser(tripId) {
+        return this.collection.updateMany({
+        }, {
+            $pull: {
+                'baskets': {
+                    tripId: tripId
+                }
+            },
+        }, { multi: true });
+    }
 }
 
 module.exports = UsersData;

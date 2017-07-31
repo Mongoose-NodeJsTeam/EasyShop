@@ -119,6 +119,26 @@ class TripshopController {
                     });
             });
     }
+
+    deleteTripShop(req, res) {
+        const tripId = req.params.id;
+        const userId = req.user._id;
+
+
+        return Promise.all([
+            this.data.tripshops.deleteById(tripId),
+            this.data.users.deleteTripshopFromUser(userId, tripId),
+            this.data.users.deleteBasketFromDeletedTripShop(userId, tripId),
+            this.data.users.deleteBasketFromBuyerUser(tripId)
+        ]).then(([a, b, c, d]) => {
+            console.log(d);
+            console.log(tripId);
+        })
+            .then(() => {
+                req.flash('success', 'Tripshop deleted!');
+                res.redirect('/tripshops/');
+            });
+    }
 }
 
 const init = (data) => {
