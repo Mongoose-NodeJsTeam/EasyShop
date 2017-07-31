@@ -4,12 +4,28 @@ class TripshopController {
     }
 
     loadTripshopForm(req, res) {
-        res.status(200)
-            .render('tripshop/form', {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
+    return res.render('tripshop/form', {
                 user: req.user
             });
     }
+
     loadProducts(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         const user = req.user;
 
         const tripId = req.params.id;
@@ -29,6 +45,14 @@ class TripshopController {
     }
 
     loadAllTripshops(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         return this.data.tripshops.filterBy({
             'user.userId': {
                 $ne: req.user._id
@@ -43,6 +67,14 @@ class TripshopController {
     }
 
     loadTripshopCreationalForm(req, res) {
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
+
+        if (req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
         return this.data.shops.getAll()
             .then((shops) => {
                 res.status(200)
@@ -54,10 +86,18 @@ class TripshopController {
     }
 
     createTripshop(req, res) {
-        const user = req.user;
-        const shopId = req.body.shop
+        if (!req.isAuthenticated()) {
+            return res.redirect('/auth/sign-in');
+        }
 
-        this.data.shops.findById(shopId)
+        if (req.user.isProUser) {
+            return res.render('unauthorized');
+        }
+
+        const user = req.user;
+        const shopId = req.body.shop;
+
+        return this.data.shops.findById(shopId)
             .then((shop) => {
                 this.data.tripshops.create(req.body, shop, user)
                     .then((tripshop) => {
