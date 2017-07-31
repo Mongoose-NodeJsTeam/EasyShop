@@ -14,7 +14,6 @@ block content
         .row
             each shop in shops
                 .col-md-4.thumbnail
-                    img.img-responsive(src='http://placehold.it/700x400', alt='')
                     h3.text-center
                         a(href='/shop/' + shop._id)=shop.name
                     p.text-center= shop.description

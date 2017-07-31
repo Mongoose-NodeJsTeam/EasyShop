@@ -13,6 +13,7 @@ block content
             .row.text-center
                 each product in shop.products
                     include ../partials/shop/_shopProductsTempl
+                        p
                         .text-center
                             button.btn.btn-primary.btnEditProduct(data-toggle='modal', data-target='#productEdit' shopid= shop._id productid= product._id) Edit
                             button.btn.btn-danger.delProductBtn(shopid= shop._id productid= product._id) Delete

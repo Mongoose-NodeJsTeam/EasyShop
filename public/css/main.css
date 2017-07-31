@@ -1,6 +1,8 @@
 /*--Bootstrap extension--*/
 
 body {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
     padding-top: 70px;
 }
 

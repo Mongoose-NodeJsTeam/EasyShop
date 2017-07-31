@@ -15,7 +15,6 @@ block content
                             th.text-center Total
                             th  
                     tbody#bodyTable
-
                         if products && products.length > 0
                             each product in products
                                 tr.productsInformation
@@ -27,7 +26,6 @@ block content
                                         btn.minus.alert --
                                         btn.plus.glyphicon-resize-small ++
                                         input.quantity.form-control(type='text', value=product.quantity onchange="quantityChange(this")
-
                                     td.productPrice.col-sm-1.col-md-1.text-center
                                         strong=product.price
                                     td.calculateTotal.col-sm-1.col-md-1.text-center
@@ -35,7 +33,6 @@ block content
                                     td.col-sm-1.col-md-1
                                         button.removeProduct.btn.btn-danger(type='button')
                                             |  Remove
-
                             tr
                                 td   
                                 td   
@@ -50,7 +47,6 @@ block content
                                 td   
                                 td   
                                 td
-
                                     a#ContinueShop.btn.btn-default(href='tripshops/' + tripId)
                                         span.glyphicon.glyphicon-shopping-cart
                                         |  Continue Shopping
@@ -63,6 +59,6 @@ block content
                             h3 There are no products in your basket, so start shopping
                             span
                                 a(href='/tripshops/findTripshop') Find your shopper
+
 block additionalBottomScripts
-    script(src="/libs/jquery/dist/jquery.js")
     script(src="/public/js/actionsWithBasket.js")

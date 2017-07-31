@@ -8,8 +8,8 @@ block content
         p #{user.isProUser}
     if user.tripshops
         each trip in user.tripshops
-            if user.BuyersBaskets.length>0
-                div Your Commands To buy, shoppera koito trqbva da kupi
+            if user.BuyersBaskets
+                div Your Commands To buy
                     h4=trip.date
                     each item in user.BuyersBaskets
                         each product in item.basket
@@ -21,11 +21,13 @@ block content
             else
                 h5 No commands fot the trip
     if user.baskets
-        div Your Commands, tova koeto toi porachva
+        div Your Commands
             each item in user.baskets
                 h3 Basket
                     each product in item
                         h5= product.product
                         | --->
                         span=product.quantity
+    else
+        h3 You have no commands right now!
 
