@@ -29,12 +29,12 @@ class AuthController {
         const auth = passport.authenticate('local', (error, user) => {
             if (error) {
                 req.flash('error', error);
-                res.render('auth/sign-in-form');
+                return res.render('auth/sign-in-form');
             }
 
             if (!user) {
                 req.flash('error', error);
-                res.render('auth/sign-in-form');
+                return res.render('auth/sign-in-form');
             }
 
             req.login(user, (e) => {
