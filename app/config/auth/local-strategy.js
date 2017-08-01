@@ -1,4 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
 
 const applyTo = (passport, data) => {
     const localStrategy = new LocalStrategy((username, password, done) => {

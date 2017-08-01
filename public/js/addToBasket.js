@@ -77,7 +77,7 @@ $(document).ready(function() {
                             const productAlreadyInShop =
                                 JSON.parse(localStorage[key]);
                             //proverka za dali e sashtiq user, i sashtiq trip
-                            if (productAlreadyInShop.tripId === 'undefined' ||
+                            if (productAlreadyInShop.tripId === undefined ||
                                 productAlreadyInShop.tripId === product.tripId||
                                 productAlreadyInShop.userId!==userId) {
         //parvata proverka e zashtoto product ne dobavq ako zanulim koshnicata
