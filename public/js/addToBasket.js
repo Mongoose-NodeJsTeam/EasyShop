@@ -1,24 +1,21 @@
 /* globals $*/
-$(document).ready(function () {
-    $('.quantitySetter').on('change', function () {
-
+$(document).ready(function() {
+    $('.quantitySetter').on('change', function() {
         const quantity = $(this).val();
         $(this).next().attr('data-quantity', quantity);
-
-
     });
 
     $('.addToBasket').on('click', function (e) {
         let productQuantity = $(e.target).attr('data-quantity');
+
         if (productQuantity > 0) {
             let counter = localStorage.getItem('counter');
             if (counter === null) {
                 counter = 0;
-
             }
+
             counter++;
             localStorage.setItem('counter', counter);
-
 
             const userId = $(e.target).attr('data-user');
             const tripDate = $(e.target).attr('data-date');
@@ -30,14 +27,14 @@ $(document).ready(function () {
             const productName = $(e.target).attr('data-name');
             const productPrice = $(e.target).attr('data-price');
 
-            //TODO validation if quantity ===0
+            // TODO validation if quantity ===0
             // if (productQuantity === 0) {
-            //     alert("You have already items from different trip in your basket. Please Validate or Cancel ");
+            //     alert("You have already items from different trip
+            //     in your basket. Please Validate or Cancel ");
             //     break;
             // }
 
             const prodTotal = (+productPrice * +productQuantity).toFixed(2);
-
 
             const product = {
                 key: counter,
@@ -52,8 +49,6 @@ $(document).ready(function () {
                 price: productPrice,
                 quantity: productQuantity.toString(),
                 total: prodTotal,
-
-
             };
             //alert ako sa razlichni shops
             if (counter > 1) {
@@ -63,8 +58,9 @@ $(document).ready(function () {
                         let productAlreadyInShop = JSON.parse(localStorage[key]);
                         //proverka za dali e sashtiq user
                         if (productAlreadyInShop.shopId !== product.shopId) {
-                            alert("The products must be from the same shop");
-                            window.location = '/shop/' + productAlreadyInShop.shopId;
+                            alert('The products must be from the same shop');
+                            window.location = '/shop/' +
+                                                productAlreadyInShop.shopId;
                         }
                     }
                 }
@@ -81,14 +77,15 @@ $(document).ready(function () {
                             const productAlreadyInShop =
                                 JSON.parse(localStorage[key]);
                             //proverka za dali e sashtiq user, i sashtiq trip
-                            if (productAlreadyInShop.tripId === undefined ||
+                            if (productAlreadyInShop.tripId === 'undefined' ||
                                 productAlreadyInShop.tripId === product.tripId||
                                 productAlreadyInShop.userId!==userId) {
         //parvata proverka e zashtoto product ne dobavq ako zanulim koshnicata
 
                                 localStorage[counter] = JSON.stringify(product);
                                 break;
-                            } else {
+                            }
+                            else {
                                 alert('You have already ' +
                                     'items from different' +
                                     'trip in your basket. ' +
@@ -97,12 +94,14 @@ $(document).ready(function () {
                                 break;
                             }
                         }
-                    } else {
+                    }
+                    else {
                         localStorage[counter] = JSON.stringify(product);
                     }
                 }
             }
-        } else {
+        }
+        else {
             alert('Must selected quantity');
         }
     });

@@ -1,6 +1,4 @@
 const express = require('express');
-const passport = require('passport');
-
 
 const attachTo = (app, data) => {
     const authRouter = new express.Router();

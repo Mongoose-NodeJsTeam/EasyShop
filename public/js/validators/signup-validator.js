@@ -32,14 +32,16 @@ $().ready(() => {
                 required: 'Username is required!',
                 minlength: 'Username should be at least 2 symbols long!',
                 maxlength: 'Username should not be more than 15 symbols long!',
-                regx: 'Username should contain only latin letters, numbers, . and _'
+                regx: 'Username should ' +
+                      'contain only latin letters, numbers, . and _'
             },
             email: 'Enter valid email please!',
             address: {
                 required: 'Address is required!',
                 minlength: 'Address should be at least 15 symbols long!',
                 maxlength: 'Address should not be more than 30 symbols long!',
-                regx: 'Address should contain only latin letters, numbers, white spaces, (-), (.)!'
+                regx: 'Address should contain only ' +
+                      'latin letters, numbers, white spaces, (-), (.)!'
             },
             password: {
                 required: 'Password is required!',
@@ -55,14 +57,18 @@ $().ready(() => {
                 'font-style': 'italic',
             });
 
-            if (element.attr('name') === 'username' )
+            if (element.attr('name') === 'username' ) {
                 error.insertAfter('#usernameInputGroup');
-            else if (element.attr('name') === 'email' )
+            }
+            else if (element.attr('name') === 'email' ) {
                 error.insertAfter('#emailInputGroup');
-            else if (element.attr('name') === 'address' )
+            }
+            else if (element.attr('name') === 'address' ) {
                 error.insertAfter('#addressInputGroup');
-            else if (element.attr('name') === 'password' )
+            }
+            else if (element.attr('name') === 'password' ) {
                 error.insertAfter('#passwordInputGroup');
+            }
         }
     });
 });

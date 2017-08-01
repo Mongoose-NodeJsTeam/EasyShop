@@ -42,4 +42,4 @@ const init = (data) => {
     return new MapController(data);
 };
 
-module.exports = {init};
+module.exports = { init };

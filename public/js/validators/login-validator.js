@@ -21,7 +21,8 @@ $().ready(() => {
                 required: 'Username is required!',
                 minlength: 'Username should be at least 2 symbols long!',
                 maxlength: 'Username should not be more than 15 symbols long!',
-                regx: 'Username should contain only latin letters, numbers, . and _'
+                regx: 'Username should contain ' +
+                      'only latin letters, numbers, . and _'
             },
             password: {
                 required: 'Password is required!',
@@ -36,10 +37,12 @@ $().ready(() => {
                 'font-style': 'italic'
             });
 
-            if (element.attr('name') === 'username' )
+            if (element.attr('name') === 'username' ) {
                 error.insertAfter('#usernameInputGroup');
-            else if (element.attr('name') === 'password' )
+            }
+            else if (element.attr('name') === 'password' ) {
                 error.insertAfter('#passwordInputGroup');
+            }
         }
     });
 });

@@ -8,7 +8,8 @@
             if (data.shops.length || data.users.length) {
                 console.log(data);
                 initMap(data);
-            } else {
+            }
+            else {
                 createNoContentMsg();
             }
         }
@@ -28,23 +29,24 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP,
         };
 
-        var map = new google.maps.Map(document.getElementById('map'), myOptions);
-        var geocoder = new google.maps.Geocoder();
+        let map = new google.maps.Map(
+            document.getElementById('map'),
+            myOptions);
+
+        const geocoder = new google.maps.Geocoder();
         let bounds = new google.maps.LatLngBounds();
 
         for (let prop in data) {
-            let arrayOfObjs = data[prop];
+            const arrayOfObjs = data[prop];
 
-            if(arrayOfObjs.length > 0) {
+            if (arrayOfObjs.length > 0) {
                 createMapWithMarkers(prop, arrayOfObjs);
             }
         }
-        // map.fitBounds(bounds);
-
 
         function createMapWithMarkers(property, items) {
-            for (var i = 0; i < items.length; i++) {
-                var obj = {};
+            for (let i = 0; i < items.length; i++) {
+                let obj = {};
                 if (property === 'shops') {
                     obj.property = property;
                     obj.address = items[i].address;
@@ -53,7 +55,8 @@
                     obj.urlText = 'Visit shop page.';
                     obj.icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
                     geocodding(obj, geocoder, map, bounds);
-                } else {
+                }
+                else {
                     obj.property = property;
                     obj.address = items[i].address;
                     obj.title = items[i].username;
@@ -90,7 +93,8 @@
                                 obj.url +'>' +
                                 obj.urlText +
                             '</a>';
-                    } else {
+                    }
+                    else {
                         str = [];
 
                         let header =
@@ -141,7 +145,8 @@
 
                 bounds.extend(results[0].geometry.location);
                 // map.fitBounds(bounds);
-            } else {
+            }
+            else {
                 alert('Geocode of ' + obj.address + ' failed,' + status);
             }
         });

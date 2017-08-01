@@ -10,7 +10,7 @@ const applyTo = (app) => {
     app.set('views', path.join(__dirname, '../../views'));
 
     app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.urlencoded({ extended: true }));
 
     const libsPath = path.join(__dirname, '../../../node_modules');
     app.use('/libs', express.static(libsPath));
@@ -23,7 +23,6 @@ const applyTo = (app) => {
         next();
     });
     app.use(require('connect-flash')());
-
 };
 
 module.exports = { applyTo };

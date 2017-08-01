@@ -52,16 +52,15 @@ class ShopData extends BaseData {
                     tripshops: tripshop
                 },
             });
-        } else {
-            return this.collection.updateOne({
-                    _id: new ObjectID(shop._id)
-                }, {
-                    $set: {
-                        tripshops: [tripshop],
-                    }
-                }
-            );
         }
+        return this.collection.updateOne({
+                _id: new ObjectID(shop._id)
+            }, {
+                $set: {
+                    tripshops: [tripshop],
+                }
+            }
+        );
     }
 
     updateShopById(shopId, shopData) {

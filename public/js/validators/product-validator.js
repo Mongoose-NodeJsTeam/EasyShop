@@ -26,8 +26,10 @@ $().ready(() => {
             name: {
                 required: 'Product name is required!',
                 minlength: 'Product name should be at least 2 symbols long!',
-                maxlength: 'Product name should not be more than 15 symbols long!',
-                regx: 'Product name should consist only lattin letters and spaces!'
+                maxlength: 'Product name should' +
+                            ' not be more than 15 symbols long!',
+                regx: 'Product name should' +
+                      ' consist only lattin letters and spaces!'
             },
             price: {
                 required: 'Price is required!',
@@ -48,13 +50,15 @@ $().ready(() => {
                 'float': 'right'
             });
 
-            if (element.attr('name') === 'name' )
+            if (element.attr('name') === 'name' ) {
                 error.insertAfter('#nameLabel');
-            else if (element.attr('name') === 'price' )
+            }
+            else if (element.attr('name') === 'price' ) {
                 error.insertAfter('#priceLabel');
-            else if (element.attr('name') === 'weight' )
+            }
+            else if (element.attr('name') === 'weight' ) {
                 error.insertAfter('#weightLabel');
-
+            }
         },
     });
 });

@@ -1,6 +1,6 @@
 class ModelsValidator {
     static _validateString(value, minLength, maxLength, stringRgxPattern) {
-        if ( value ==! 'string') {
+        if ( value ===! 'string') {
             return false;
         }
 
