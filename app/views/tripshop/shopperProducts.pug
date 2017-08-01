@@ -2,14 +2,20 @@ extends ../shared/_layout
 
 block content
     h2.text-center Welcome to #{shop.name}
-    h2.text-center You can order products to #{shopper} who is going to be here on #{date}.
-    .row.text-center
-        each product in products
-            include ../partials/shop/_shopProductsTempl
-                .text-center
-                    input.quantitySetter.form-control(type='number', value = 0, name='quantity')
-                    a.addProductButton.addToBasket.btn.btn-lg.btn-primary(data-Productid=product._id, data-shop=shop._id, data-name=product.name, data-price=product.price,
-                    data-weight=product.weight, data-quantity=value, data-shopper=shopper, data-shopperId=shopperId, data-user=userId, data-tripshopId=tripId, data-date=date) Add product
+    if products && products.length > 0
+        h2.text-center You can order products to #{shopper} who is going to be here on #{date}.
+            .row.text-center
+                each product in products
+                    include ../partials/shop/_shopProductsTempl
+                        .text-center
+                            input.quantitySetter.form-control(type='number', value = 0, name='quantity')
+                            a.addProductButton.addToBasket.btn.btn-lg.btn-primary(data-Productid=product._id, data-shop=shop._id, data-name=product.name, data-price=product.price,
+                            data-weight=product.weight, data-quantity=value, data-shopper=shopper, data-shopperId=shopperId, data-user=userId, data-tripshopId=tripId, data-date=date) Add product
+    else
+        h3.text-center Unfortunately, there are no product in #{shop.name}. Please return back later!
+
+
+
 
 
 block additionalBottomScripts

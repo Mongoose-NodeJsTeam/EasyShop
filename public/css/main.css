@@ -40,3 +40,20 @@ select {
 #myTripshops, #allTripshops, #myShopsInfo {
     color: black;
 }
+
+#headerUsername {
+    background-color: lightslategrey;
+    border-radius: 5px;
+}
+
+#ordersContainer {
+    border-radius: 5px;
+}
+
+#buyerUsername {
+    background-color: lightgray;
+}
+
+#noTrips, #noTripshops {
+    color: white;
+ }

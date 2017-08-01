@@ -19,7 +19,7 @@ block content
                     .text-center
                         a.btn.btn-lg.btn-primary(href='/tripshops/' + trip._id) See products
         else
-            .container
-                h3 Sorry there are no trips at the moment
+            .container#noTripshops
+                h3 Sorry there are no tripshops at the moment
                 h4 Do you want to create one?
                 a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop

@@ -70,7 +70,7 @@ class AuthController {
             })
             .then(() => {
                 req.flash('success', 'Signed up successful! Please sign in!');
-                return res.redirect('sign-in');
+                res.redirect('sign-in');
             })
             .catch((err) => {
                 req.flash('error', err.message);

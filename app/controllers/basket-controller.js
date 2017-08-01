@@ -60,6 +60,7 @@ class BasketController {
         let tripId;
         let shopperId;
         let buyerID;
+        let shopperName;
         const userId = req.user._id.toString();
 
         for (const key in products) {
@@ -70,6 +71,7 @@ class BasketController {
                     shopperId = item.shopperId;
                     tripId = item.tripId;
                     buyerID = item.userId;
+                    shopperName=item.shopper;
                 }
             }
         }
@@ -83,10 +85,12 @@ class BasketController {
             tripId: tripId
 
         };
+
         const basketToUser = {
             basket: basket,
             bayerId: buyerID,
-            tripId: tripId
+            tripId: tripId,
+            shopperName: shopperName
         };
 
         return Promise.all(

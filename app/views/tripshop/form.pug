@@ -5,7 +5,7 @@ block content
         != messages('flashMessages/flashMessages', locals)
         if user.tripshops && user.tripshops.length > 0
             .text-center
-                a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add trip
+                a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop
             .row
                 each trip in user.tripshops
                     .col-md-4.thumbnail
@@ -21,6 +21,6 @@ block content
                         .text-center
                             a.btn.btn-danger(href='/tripshops/' + trip._id + '/delete-tripshop') Delete
         else
-            .container
+            .container#noTrips
                 h3 You don't have any tripshops for the moment, create one?
                 a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop

@@ -1,12 +1,13 @@
 /* globals $*/
+
 $(document).ready(function() {
     $('.quantitySetter').on('change', function() {
         const quantity = $(this).val();
         $(this).next().attr('data-quantity', quantity);
     });
 
-    $('.addToBasket').on('click', function (e) {
-        let productQuantity = $(e.target).attr('data-quantity');
+    $('.addToBasket').on('click', function(e) {
+        const productQuantity = $(e.target).attr('data-quantity');
 
         if (productQuantity > 0) {
             let counter = localStorage.getItem('counter');
@@ -26,14 +27,6 @@ $(document).ready(function() {
             const shopId = $(e.target).attr('data-shop');
             const productName = $(e.target).attr('data-name');
             const productPrice = $(e.target).attr('data-price');
-
-            // TODO validation if quantity ===0
-            // if (productQuantity === 0) {
-            //     alert("You have already items from different trip
-            //     in your basket. Please Validate or Cancel ");
-            //     break;
-            // }
-
             const prodTotal = (+productPrice * +productQuantity).toFixed(2);
 
             const product = {
@@ -50,59 +43,63 @@ $(document).ready(function() {
                 quantity: productQuantity.toString(),
                 total: prodTotal,
             };
-            //alert ako sa razlichni shops
+
             if (counter > 1) {
-                let keysLocalStorage = Object.keys(localStorage);
-                for (let key of keysLocalStorage) {
+                const keysLocalStorage = Object.keys(localStorage);
+                let keyIsString=true;
+                for (const key of keysLocalStorage) {
+                    if(Number(key)){
+                        keyIsString=false;
+                    }
                     if (Number(key) && Number(key) !== counter) {
-                        let productAlreadyInShop = JSON.parse(localStorage[key]);
-                        //proverka za dali e sashtiq user
+                        const productAlreadyInShop =
+                            JSON.parse(localStorage[key]);
+
                         if (productAlreadyInShop.shopId !== product.shopId) {
                             alert('The products must be from the same shop');
                             window.location = '/shop/' +
-                                                productAlreadyInShop.shopId;
+                                productAlreadyInShop.shopId;
+                        }
+
+                        if (productAlreadyInShop.productId ===
+                            product.productId) {
+                            productAlreadyInShop.quantity =
+                                Number(product.quantity) +
+                                Number(productAlreadyInShop.quantity);
+
+                            productAlreadyInShop.total =
+                                +productAlreadyInShop.quantity *
+                                +productAlreadyInShop.price;
+
+                            return localStorage.setItem(
+                                productAlreadyInShop.key,
+                                JSON.stringify(productAlreadyInShop));
+                        }
+
+                        if (productAlreadyInShop.tripId !== product.tripId ||
+                            productAlreadyInShop.userId !== userId) {
+                            alert('You have already ' +
+                                'items from different' +
+                                'trip in your basket. ' +
+                                'Please Validate or Cancel ');
+                            $('#loadShoppingCart').trigger('click');
+                            break;
+                        }
+                        else {
+                            localStorage[counter] = JSON.stringify(product);
                         }
                     }
+                }
+                if(keyIsString){
+                    localStorage[counter] = JSON.stringify(product);
                 }
             }
             if (counter === 1) {
                 localStorage[counter] = JSON.stringify(product);
             }
-            //check if user have already a tripshop in the basket
-            if (counter > 1) {
-                const keysLocalStorage = Object.keys(localStorage);
-                for (let key of keysLocalStorage) {
-                    if (key !== 'counter') {
-                        if (Number(key) !== counter) {
-                            const productAlreadyInShop =
-                                JSON.parse(localStorage[key]);
-                            //proverka za dali e sashtiq user, i sashtiq trip
-                            if (productAlreadyInShop.tripId === undefined ||
-                                productAlreadyInShop.tripId === product.tripId||
-                                productAlreadyInShop.userId!==userId) {
-        //parvata proverka e zashtoto product ne dobavq ako zanulim koshnicata
-
-                                localStorage[counter] = JSON.stringify(product);
-                                break;
-                            }
-                            else {
-                                alert('You have already ' +
-                                    'items from different' +
-                                    'trip in your basket. ' +
-                                    'Please Validate or Cancel ');
-                                $('#loadShoppingCart').trigger('click');
-                                break;
-                            }
-                        }
-                    }
-                    else {
-                        localStorage[counter] = JSON.stringify(product);
-                    }
-                }
-            }
         }
         else {
-            alert('Must selected quantity');
+            return alert('Must selected quantity');
         }
     });
 });

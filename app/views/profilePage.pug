@@ -5,7 +5,7 @@ block scripts
 
 block content
     #profileContainer.container
-        .row
+        .row#headerUsername
             .col-md-12
                 h2.text-center #{user.username}
         .row
@@ -16,44 +16,37 @@ block content
                 h4 E-mail:
                 h4 #{user.email}
         if !user.isProUser
-            .row
+            .row#headerUsername
+                .col-md-12
+                    h3.text-center Orders
+            .row#ordersContainer
                 .col-md-6.text-right
                     if user.baskets && user.baskets.length > 0
-                        h4 You have #{user.baskets.length} baskets assigned to tripshops!
+                        each item in user.baskets
+                            h4 You order to #{item.shopperName} the following products:
+                            each basket in item.basket
+                                h5 #{basket.product}: #{basket.quantity}
                     else
-                        h4 You have't assigned basket to a tripshops!
+                        h4 You don't have any assigned baskets to somebody else tripshops!
                 .col-md-6.text-left
                     if user.tripshops && user.tripshops.length > 0
-                        h4 You have #{user.tripshops.length} tripshops created!
+                        each trip in user.tripshops
                             if user.BuyersBaskets && user.BuyersBaskets.length > 0
-                                h4 With #{user.BuyersBaskets.length} baskets assigned to them.
+                                #bayerBasket
+                                    h4 On #{trip.date} you have to buy from #{trip.shop.name}
+                                        each item in user.BuyersBaskets
+                                            h5#buyerUsername To #{item.buyer.username}
+                                            each product in item.basket
+                                                if product.tripId = trip._id
+                                                    h5 #{product.product}: #{product.quantity}
+                            else
+                                h4 Still don't have assigned baskets to your tripshops!
                     else
-                        h4 No baskets assigned to you
+                        h4 You don't have any registered tripshops!
         else
             .row
                 .col-md-6.text-right
                     if user.shops && user.shops.length > 0
                         h4 You have #{user.shops.length} registered shops!
                     else
-                        h4 You have't assigned basket to a tripshops!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        h4 You don't have any registered shops!
