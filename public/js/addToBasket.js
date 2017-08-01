@@ -1,5 +1,4 @@
 /* globals $*/
-
 $(document).ready(function() {
     $('.quantitySetter').on('change', function() {
         const quantity = $(this).val();

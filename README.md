@@ -10,3 +10,4 @@ Pro users can create account, which gives them the functionality to manage their
 
 On the other side, the regular user can create new account, create and manage tripshops, which is going to a shop and offer somebody else who wants something from the same shop to be buy from you.  After choosing a tripshop, the user can see the products and the quantity he wants and can added to the basket. When he is finished, he can checks its order in the basket menu and change the quantity or remove the product. When everything looks good, by pressing the ‘Checkout’ button his order will be send to the user who is going to shop. 
 
+##### YouTube Video - https://www.youtube.com/watch?v=X7SYIWOuP0A&feature=youtu.be
