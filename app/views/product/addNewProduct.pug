@@ -3,15 +3,11 @@ extends ../shared/_layout
 block app-title
     title EasyShop: Add new product
 
-block scripts
-    script(src="/public/js/validators/product-validator.js")
-
 block content
     section#contact
         .section-content.text-center
             h1.section-header
                 | Add new product to #{shop.name}
-
         .contact-section
             .container
                 form#productForm(action='/shop/' + shop._id+ '/add-product', method='post')
@@ -29,3 +25,7 @@ block content
                         div
                             input.btn.btn-block.btn-lg.btn-primary(type='submit', value='Add')
         != messages('flashMessages/flashMessages', locals)
+
+block additionalBottomScripts
+    script(src="/public/js//modals/productEdit-Modal.js")
+    script(src="/public/js/validators/product-validator.js")
