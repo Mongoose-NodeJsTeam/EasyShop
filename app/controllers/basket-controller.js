@@ -14,13 +14,13 @@ class BasketController {
             return res.render('unauthorized');
         }
 
-        const userId = req.user._id;
+        const userId = req.user._id.toString();
         const user = req.user;
 
         const products = (req.body);
-        let tripId,
-            date,
-            shopperId;
+        let tripId;
+        let date;
+        let shopperId;
 
         const arr = [];
 
@@ -28,7 +28,8 @@ class BasketController {
             if (products.hasOwnProperty(key)) {
                 const item = JSON.parse(products[key]);
 
-                if (item.userId == userId) {
+                //load just products that the autenticate user command
+                if ((item.userId) === userId) {
                     arr.push((item));
                     tripId = item.tripId;
                     date = item.tripDate;
@@ -59,22 +60,17 @@ class BasketController {
         let tripId;
         let shopperId;
         let buyerID;
-        const userId = req.user._id;
+        const userId = req.user._id.toString();
 
         for (const key in products) {
             if (products.hasOwnProperty(key)) {
                 const item = JSON.parse(products[key]);
-                if (item.userId == userId) {
-                    console.log(item);
-
-//proverka dali itemite sa ot picha kadeto gi e porachal server chasta,item.userId ne e implementirano za momenta
-//tripId=item.tripId
+                if (item.userId === userId) {
+                    basket.push((item));
+                    shopperId = item.shopperId;
+                    tripId = item.tripId;
+                    buyerID = item.userId;
                 }
-                basket.push((item));
-
-                shopperId = item.shopperId;
-                tripId = item.tripId;
-                buyerID=item.userId;
             }
         }
 

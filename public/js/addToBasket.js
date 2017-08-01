@@ -74,31 +74,36 @@ $(document).ready(function () {
             }
             //check if user have already a tripshop in the basket
             if (counter > 1) {
-                let keysLocalStorage = Object.keys(localStorage);
+                const keysLocalStorage = Object.keys(localStorage);
                 for (let key of keysLocalStorage) {
                     if (key !== 'counter') {
                         if (Number(key) !== counter) {
-                            let productAlreadyInShop = JSON.parse(localStorage[key]);
-                            //proverka za dali e sashtiq user
-                            if (productAlreadyInShop.tripId === undefined || productAlreadyInShop.tripId === product.tripId) {//parvata proverka e zashtoto product ne dobavq ako zanulim koshnicata
+                            const productAlreadyInShop =
+                                JSON.parse(localStorage[key]);
+                            //proverka za dali e sashtiq user, i sashtiq trip
+                            if (productAlreadyInShop.tripId === undefined ||
+                                productAlreadyInShop.tripId === product.tripId||
+                                productAlreadyInShop.userId!==userId) {
+        //parvata proverka e zashtoto product ne dobavq ako zanulim koshnicata
 
                                 localStorage[counter] = JSON.stringify(product);
                                 break;
                             } else {
-                                alert("You have already items from different trip in your basket. Please Validate or Cancel ");
+                                alert('You have already ' +
+                                    'items from different' +
+                                    'trip in your basket. ' +
+                                    'Please Validate or Cancel ');
                                 $('#loadShoppingCart').trigger('click');
                                 break;
                             }
                         }
-
                     } else {
                         localStorage[counter] = JSON.stringify(product);
                     }
-
                 }
             }
-        }else{
-            alert('Must selected quantity')
+        } else {
+            alert('Must selected quantity');
         }
     });
 });

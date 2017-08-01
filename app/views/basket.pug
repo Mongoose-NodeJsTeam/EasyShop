@@ -22,8 +22,8 @@ block content
                                     td.productInBasket.col-sm-8.col-md-6('data-key'=product.key)
                                         h3.product.media-heading=product.name
                                     td.col-sm-1.col-md-1(style='text-align: center')
-                                        btn.minus.alert --
-                                        btn.plus.glyphicon-resize-small ++
+                                        btn.minus.btn.btn-default.btn-sm -
+                                        btn.plus.btn.btn-default.btn-sm +
                                         input.quantity.form-control(type='text', value=product.quantity onchange="quantityChange(this")
                                     td.productPrice.col-sm-1.col-md-1.text-center
                                         strong=product.price
