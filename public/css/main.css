@@ -2,19 +2,33 @@
 
 body {
     background-image: url('../images/background.jpg');
-    background-size: cover;
+    background-size:cover;
     padding-top: 70px;
-    color: saddlebrown;
+    color: white;
 }
 
 .navbar {
     font-size: 16px !important;
 }
 
+.modal-content {
+    background-color: lightgrey;
+    color: black;
+}
+
 /*--End of Bootstrap extension--*/
+
+#slogan {
+    margin-top: 15%;
+    margin-left: 20%;
+}
 
 #homePage-header {
     text-align: center;
+}
+
+select {
+    color: black; !important;
 }
 
 #discover-btn {
@@ -23,21 +37,6 @@ body {
     margin-left: 48%;
 }
 
-#map {
-    position: relative;
-    margin: 0 auto;
-    width: 1170px;
-    height: 800px;
-}
-
-
-#leftRedPins {
-    color: indianred;
-    width: 300px;
-    float:left; /* add this */
-}
-
-#rightGreenPins {
-    color: limegreen;
-    float: right; /* add this */
+#myTripshops, #allTripshops, #myShopsInfo {
+    color: black;
 }

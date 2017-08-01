@@ -1,8 +1,8 @@
 extends ../shared/_layout
 
 block content
-    h2.text-center= shop.name
-    h1.text-center Hi There #{shopper} is on #{date} Here !!!
+    h2.text-center Welcome to #{shop.name}
+    h2.text-center You can order products to #{shopper} who is going to be here on #{date}.
     .row.text-center
         each product in products
             include ../partials/shop/_shopProductsTempl

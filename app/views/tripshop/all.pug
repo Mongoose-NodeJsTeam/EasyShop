@@ -2,28 +2,24 @@ extends ../shared/_layout
 
 
 block content
+    #allTripshops
         if trips.length
-                each trip in trips
-                    .col-md-4.thumbnail
-                        .text-center
-                            label(for='shopper') Your Shopper
-                            input.form-control(readonly value=trip.user.username , name='shopper')
-                        .text-center
-                            label(for='tripDate') Date
-                            input.form-control(readonly value=trip.date, name='tripDate')
-                        ul.list-group.list-group-flush
-                            li.list-group-item
-                                strong Shop:
-                                    span= trip.shop.name
-
-                        .text-center
-                            a.btn.btn-lg.btn-primary(href='/tripshops/' + trip._id) See products
-
-
+            each trip in trips
+                .col-md-4.thumbnail
+                    .text-center
+                        label(for='shopper') User
+                        input.form-control.text-center(readonly value=trip.user.username , name='shopper')
+                    .text-center
+                        label(for='tripDate') going on
+                        input.form-control.text-center(readonly value=trip.date, name='tripDate')
+                    ul.list-group.list-group-flush
+                        li.list-group-item.text-center
+                            strong to
+                                span #{trip.shop.name}
+                    .text-center
+                        a.btn.btn-lg.btn-primary(href='/tripshops/' + trip._id) See products
         else
             .container
                 h3 Sorry there are no trips at the moment
                 h4 Do you want to create one?
                 a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop
-
-

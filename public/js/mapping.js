@@ -94,10 +94,10 @@
                         str = [];
 
                         let header =
-                            '<h3>' +
+                            '<h4>' +
                                 marker.title +
                                 ' goes to:' +
-                            '</h3>';
+                            '</h4>';
                         str.push(header);
 
                         for (var i = 0; i < obj.tripshops.length; i++) {

@@ -1,32 +1,59 @@
 extends ./shared/_layout
 
+block scripts
+    link(rel='stylesheet', href='/public/css/profile/profile.css')
+
 block content
-    h1 Hello #{user.username}
-    div
-        p #{user.address}
-        p #{user.email}
-        p #{user.isProUser}
-    if user.tripshops && user.tripshops.length > 0
-        each trip in user.tripshops
-            if user.BuyersBaskets && user.BuyersBaskets.length > 0
-                div Your Commands To buy
-                    h4=trip.date
-                    each item in user.BuyersBaskets
-                        each product in item.basket
-                            if product.tripId == trip._id
-                                h5= product.product
-                                    | --->
-                                    span=product.quantity
-            else
-                h5 No commands fot the trip
-    if user.baskets && user.baskets.length > 0
-        div Your Commands
-            each item in user.baskets
-                h3 Basket
-                    each product in item.basket
-                        h5= product.product
-                        | --->
-                        span=product.quantity
-    else
-        h3 You have no commands right now!
+    #profileContainer.container
+        .row
+            .col-md-12
+                h2.text-center #{user.username}
+        .row
+            .col-md-6.text-right
+                h4 Address:
+                h4 #{user.address}
+            .col-md-6.text-left
+                h4 E-mail:
+                h4 #{user.email}
+        if !user.isProUser
+            .row
+                .col-md-6.text-right
+                    if user.baskets && user.baskets.length > 0
+                        h4 You have #{user.baskets.length} baskets assigned to tripshops!
+                    else
+                        h4 You have't assigned basket to a tripshops!
+                .col-md-6.text-left
+                    if user.tripshops && user.tripshops.length > 0
+                        h4 You have #{user.tripshops.length} tripshops created!
+                            if user.BuyersBaskets && user.BuyersBaskets.length > 0
+                                h4 With #{user.BuyersBaskets.length} baskets assigned to them.
+                    else
+                        h4 No baskets assigned to you
+        else
+            .row
+                .col-md-6.text-right
+                    if user.shops && user.shops.length > 0
+                        h4 You have #{user.shops.length} registered shops!
+                    else
+                        h4 You have't assigned basket to a tripshops!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

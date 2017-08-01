@@ -2,11 +2,10 @@ extends ../shared/_layout
 
 block content
     if shops.length > 0
+        h3.text-center
+            | #{user.username}, create your tripshop
         section#contact
-            .section-content.text-center
-                != messages('flashMessages/flashMessages', locals)
-                h1.section-header
-                    | #{user.username} go create a tripshop
+            != messages('flashMessages/flashMessages', locals)
             .contact-section
                 .container
                     form(action='/tripshops/add-tripshop', method='post')
@@ -24,9 +23,3 @@ block content
     else
         .text-center
             h3 There are no registered shops in the system. Please come back later!
-
-
-
-
-block additionalBottomScripts
-    script(src="/libs/bootstrap/js/modal.js")

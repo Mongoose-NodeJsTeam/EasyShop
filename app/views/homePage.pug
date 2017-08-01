@@ -5,11 +5,10 @@ block app-title
 
 block content
     != messages('flashMessages/flashMessages', locals)
-    .row.align-middle
-        .col-12
-            h1.text-center.center-block
-                | Easy peasy, click and shop!
-            h1.text-center
-                | The modern platform for shared shopping!
-            a#discover-btn.btn.btn-success.btn-lg(href='/map')
-                | Explore
+    #slogan.row
+        .col-4
+            h1.text-center Easy peasy
+        .col-3
+            a#discover-btn.btn.btn-success.btn-lg(href='/map') click
+        .col-4.text-center
+            h1 and shop!

@@ -17,22 +17,22 @@ block content
                     h3.text-center
                         a(href='/shop/' + shop._id)=shop.name
                     p.text-center= shop.description
-                    ul.list-group.list-group-flush
+                    ul#myShopsInfo.list-group.list-group-flush
                         li.list-group-item
                             strong Number of Products:
                             if shop.products
-                                span=   shop.products.length
+                                span  #{shop.products.length}
                             else
                                 span  0
                         li.list-group-item
                             strong Email:
-                            span=  shop.email
+                            span  #{shop.email}
                         li.list-group-item
                             strong Address:
-                            span=  shop.address
+                            span  #{shop.address}
                         li.list-group-item
                             strong Mobile:
-                            span=  shop.mobile
+                            span  #{shop.mobile}
                     .text-center
                         button.btn.btn-primary.btnEditShop(data-toggle='modal', data-target='#shopEdit' shopid= shop._id) Edit
                         button.btn.btn-danger.delShopBtn(shopid= shop._id) Delete
@@ -71,7 +71,6 @@ block content
             a.btn.btn-lg.btn-primary(href='/shop/add-shop') Add shop
 
 block additionalBottomScripts
-    script(src="/libs/bootstrap/js/modal.js")
     script(src="/public/js//modals/shopEdit-Modal.js")
     script(src="/public/js/validators/shop-validator.js")
 

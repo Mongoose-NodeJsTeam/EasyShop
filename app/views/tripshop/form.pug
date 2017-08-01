@@ -1,29 +1,26 @@
 extends ../shared/_layout
 
 block content
-    != messages('flashMessages/flashMessages', locals)
-    if user.tripshops && user.tripshops.length > 0
-        .text-center
-            a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add trip
-        .row
-            each trip in user.tripshops
-                .col-md-4.thumbnail
-                    h3
+    #myTripshops
+        != messages('flashMessages/flashMessages', locals)
+        if user.tripshops && user.tripshops.length > 0
+            .text-center
+                a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add trip
+            .row
+                each trip in user.tripshops
+                    .col-md-4.thumbnail
                         a(href='/tripshops/' + trip._id)
-                    p= trip.date
-                    ul.list-group.list-group-flush
-                        li.list-group-item
-                            strong Shop:
-                                span= trip.shop.name
-                        li.list-group-item
-                            strong Buyers:
-                            if user.BuyersBaskets
-                                span= user.BuyersBaskets.length
-                            else
-                                span  0
-                    .text-center
-                        a.btn.btn-danger(href='/tripshops/' + trip._id + '/delete-tripshop') Delete
-    else
-        .container
-            h3 You don't have any tripshops for the moment, create one?
-            a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop
+                        h4.text-center #{user.username} will go to #{trip.shop.name} on #{trip.date}
+                        ul.list-group.list-group-flush
+                            li.list-group-item.text-center
+                                h4.text-center Buyers:
+                                if user.BuyersBaskets
+                                    span.text-center #{user.BuyersBaskets.length}
+                                else
+                                    span.text-center  0
+                        .text-center
+                            a.btn.btn-danger(href='/tripshops/' + trip._id + '/delete-tripshop') Delete
+        else
+            .container
+                h3 You don't have any tripshops for the moment, create one?
+                a.btn.btn-lg.btn-primary(href='/tripshops/add-tripshop') Add tripshop
