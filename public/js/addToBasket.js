@@ -1,4 +1,5 @@
 /* globals $*/
+
 $(document).ready(function() {
     $('.quantitySetter').on('change', function() {
         const quantity = $(this).val();
@@ -46,6 +47,7 @@ $(document).ready(function() {
             if (counter > 1) {
                 const keysLocalStorage = Object.keys(localStorage);
                 let keyIsString=true;
+                let mustBeAdded=true;
                 for (const key of keysLocalStorage) {
                     if(Number(key)){
                         keyIsString=false;
@@ -55,6 +57,7 @@ $(document).ready(function() {
                             JSON.parse(localStorage[key]);
 
                         if (productAlreadyInShop.shopId !== product.shopId) {
+                            mustBeAdded=false;
                             alert('The products must be from the same shop');
                             window.location = '/shop/' +
                                 productAlreadyInShop.shopId;
@@ -62,6 +65,7 @@ $(document).ready(function() {
 
                         if (productAlreadyInShop.productId ===
                             product.productId) {
+                            mustBeAdded=false;
                             productAlreadyInShop.quantity =
                                 Number(product.quantity) +
                                 Number(productAlreadyInShop.quantity);
@@ -70,6 +74,7 @@ $(document).ready(function() {
                                 +productAlreadyInShop.quantity *
                                 +productAlreadyInShop.price;
 
+
                             return localStorage.setItem(
                                 productAlreadyInShop.key,
                                 JSON.stringify(productAlreadyInShop));
@@ -77,6 +82,7 @@ $(document).ready(function() {
 
                         if (productAlreadyInShop.tripId !== product.tripId ||
                             productAlreadyInShop.userId !== userId) {
+                            mustBeAdded=false;
                             alert('You have already ' +
                                 'items from different' +
                                 'trip in your basket. ' +
@@ -84,12 +90,9 @@ $(document).ready(function() {
                             $('#loadShoppingCart').trigger('click');
                             break;
                         }
-                        else {
-                            localStorage[counter] = JSON.stringify(product);
-                        }
                     }
                 }
-                if(keyIsString){
+                if (keyIsString||mustBeAdded) {
                     localStorage[counter] = JSON.stringify(product);
                 }
             }

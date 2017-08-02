@@ -5,19 +5,19 @@ class MapController {
 
     loadMapPage(req, res) {
         if (!req.isAuthenticated()) {
-            res.redirect('map/nonAuthMap');
+           return res.redirect('map/nonAuthMap');
         }
 
-        res.render('map/mapPage');
+        return res.render('map/mapPage');
     }
 
     loadNonAuthMap(req, res) {
-        Promise.all([
+        return Promise.all([
             this.data.shops.getAll(),
             this.data.tripshops.getAll()
         ])
             .then(([shops, tripshops]) => {
-                res.render('map/nonAuthMap', {
+                return res.render('map/nonAuthMap', {
                     shops: shops,
                     tripshops: tripshops
                 });
