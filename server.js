@@ -9,7 +9,7 @@ async()
     .then((db) => require('./data').init(db))
     .then((data) => require('./app').init(data))
     .then((app) => {
-        app.listen(constants.appPort, () =>
+        app.listen(process.env.PORT || constants.appPort, () =>
             console.log(`Server running at : ${constants.appPort}`));
     })
     .catch((err) => {
